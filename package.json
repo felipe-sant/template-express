@@ -7,7 +7,7 @@
     "build": "tsc",
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "buildDocs": "npx @redocly/cli build-docs public/swagger.json -o public/routes.html",
+    "buildDocs": "npx @redocly/cli build-docs __docs__/swagger.json -o __docs__/routes.html",
     "dev": "nodemon src/index.ts"
   },
   "repository": {

@@ -9,8 +9,10 @@
         "package-lock.json": true,
         "tsconfig.json": true,
         "LICENSE": true,
-        "jest.config.js": true,
+        "jest.config.ts": true,
         "vercel.json": true,
-        ".github": true
+        ".github": true,
+        ".gitattributes": true,
+        "eslint.config.mjs": true
     }
 }
