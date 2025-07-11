@@ -93,7 +93,7 @@ class ExampleController {
                 res.status(400).json({ message: 'Body is required' })
                 return
             }
-            const result = this.exampleService.update(id, query, body)
+            const result = this.exampleService.update(id, body, query)
             if (!result) {
                 res.status(404).json({ message: 'Object not found' })
                 return
@@ -124,7 +124,7 @@ class ExampleController {
                 res.status(400).json({ message: 'Body is required' })
                 return
             }
-            const result = this.exampleService.patch(id, query, body)
+            const result = this.exampleService.patch(id, body, query)
             if (!result) {
                 res.status(404).json({ message: 'Object not found' })
                 return
@@ -155,7 +155,7 @@ class ExampleController {
                 res.status(404).json({ message: 'Object not found' })
                 return
             }
-            res.status(200).json(result)
+            res.status(204).json(result)
         } catch (error: unknown) {
             const errorMessage = getErrorMessage(error)
             res.status(500).json({ message: errorMessage })
