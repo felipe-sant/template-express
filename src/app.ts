@@ -11,7 +11,7 @@ app.use(express.json())
 
 app.get('/', (req, res) => { res.redirect('/docs') })
 app.use('/api', exampleRoutes)
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(undefined, {
     customCss: swaggerDarkThemeCss,
     customSiteTitle: 'Documentação',
     swaggerOptions: {
