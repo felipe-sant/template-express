@@ -1,0 +1,33 @@
+{
+  "name": "template-express",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipe-sant/template-express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipe-sant/template-express/issues"
+  },
+  "homepage": "https://github.com/felipe-sant/template-express#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.1",
+    "@types/node": "^14.14.31",
+    "cors": "^2.8.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
