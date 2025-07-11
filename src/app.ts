@@ -9,11 +9,14 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.get('/', (req, res) => { res.redirect('/docs')})
+app.get('/', (req, res) => { res.redirect('/docs') })
 app.use('/api', exampleRoutes)
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     customCss: swaggerDarkThemeCss,
-    customSiteTitle: 'Documentação'
+    customSiteTitle: 'Documentação',
+    swaggerOptions: {
+        spec: swaggerSpec
+    },
 }))
 
 export default app
