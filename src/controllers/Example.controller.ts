@@ -1,11 +1,12 @@
-import { Request, Response } from 'express';
-import { ExampleService } from '../services/Example.service';
+import { Request, Response } from 'express'
+import { ExampleService } from '../services/Example.service'
+import getErrorMessage from '../utils/getMessageError'
 
 class ExampleController {
-    private exampleService: ExampleService;
+    private exampleService: ExampleService
 
     constructor() {
-        this.exampleService = new ExampleService();
+        this.exampleService = new ExampleService()
     }
 
     /**
@@ -16,16 +17,17 @@ class ExampleController {
      */
     async create(req: Request, res: Response): Promise<void> {
         try {
-            const query = req.query;
-            const body = req.body;
+            const query = req.query
+            const body = req.body as unknown
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: 'Body is required' });
+                res.status(400).json({ message: 'Body is required' })
                 return
             }
-            const result = this.exampleService.create(body, query);
-            res.status(201).json(result);
-        } catch (error: any) {
-            res.status(500).json({ message: error.message });
+            const result = this.exampleService.create(body, query)
+            res.status(201).json(result)
+        } catch (error: unknown) {
+            const errorMessage = getErrorMessage(error)
+            res.status(500).json({ message: errorMessage })
         }
     }
 
@@ -37,11 +39,12 @@ class ExampleController {
      */
     async read(req: Request, res: Response): Promise<void> {
         try {
-            const query = req.query;
-            const result = this.exampleService.read(query);
-            res.status(200).json(result);
-        } catch (error: any) {
-            res.status(500).json({ message: error.message });
+            const query = req.query
+            const result = this.exampleService.read(query)
+            res.status(200).json(result)
+        } catch (error: unknown) {
+            const errorMessage = getErrorMessage(error)
+            res.status(500).json({ message: errorMessage })
         }
     }
 
@@ -53,20 +56,21 @@ class ExampleController {
      */
     async readOne(req: Request, res: Response): Promise<void> {
         try {
-            const id = req.params.id;
-            const query = req.query;
+            const id = req.params.id
+            const query = req.query
             if (!id) {
-                res.status(400).json({ message: 'ID is required' });
+                res.status(400).json({ message: 'ID is required' })
                 return
             }
-            const result = this.exampleService.readOne(id, query);
+            const result = this.exampleService.readOne(id, query)
             if (!result) {
-                res.status(404).json({ message: 'Object not found'});
+                res.status(404).json({ message: 'Object not found' })
                 return
             }
-            res.status(200).json(result);
-        } catch (error: any) {
-            res.status(500).json({ message: error.message });
+            res.status(200).json(result)
+        } catch (error: unknown) {
+            const errorMessage = getErrorMessage(error)
+            res.status(500).json({ message: errorMessage })
         }
     }
 
@@ -78,25 +82,26 @@ class ExampleController {
      */
     async update(req: Request, res: Response): Promise<void> {
         try {
-            const id = req.params.id;
-            const query = req.query;
-            const body = req.body;
+            const id = req.params.id
+            const query = req.query
+            const body = req.body as unknown
             if (!id) {
-                res.status(400).json({ message: 'ID is required' });
+                res.status(400).json({ message: 'ID is required' })
                 return
             }
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: 'Body is required' });
+                res.status(400).json({ message: 'Body is required' })
                 return
             }
-            const result = this.exampleService.update(id, query, body);
+            const result = this.exampleService.update(id, query, body)
             if (!result) {
-                res.status(404).json({ message: 'Object not found'})
+                res.status(404).json({ message: 'Object not found' })
                 return
             }
-            res.status(200).json(result);
-        } catch (error: any) {
-            res.status(500).json({ message: error.message });
+            res.status(200).json(result)
+        } catch (error: unknown) {
+            const errorMessage = getErrorMessage(error)
+            res.status(500).json({ message: errorMessage })
         }
     }
 
@@ -108,25 +113,26 @@ class ExampleController {
      */
     async patch(req: Request, res: Response): Promise<void> {
         try {
-            const id = req.params.id;
-            const query = req.query;
-            const body = req.body;
+            const id = req.params.id
+            const query = req.query
+            const body = req.body as unknown
             if (!id) {
-                res.status(400).json({ message: 'ID is required' });
+                res.status(400).json({ message: 'ID is required' })
                 return
             }
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: 'Body is required' });
+                res.status(400).json({ message: 'Body is required' })
                 return
             }
-            const result = this.exampleService.patch(id, query, body);
+            const result = this.exampleService.patch(id, query, body)
             if (!result) {
-                res.status(404).json({ message: 'Object not found'})
+                res.status(404).json({ message: 'Object not found' })
                 return
             }
-            res.status(200).json(result);
-        } catch (error: any) {
-            res.status(500).json({ message: error.message });
+            res.status(200).json(result)
+        } catch (error: unknown) {
+            const errorMessage = getErrorMessage(error)
+            res.status(500).json({ message: errorMessage })
         }
     }
 
@@ -138,20 +144,21 @@ class ExampleController {
      */
     async delete(req: Request, res: Response): Promise<void> {
         try {
-            const id = req.params.id;
-            const query = req.query;
+            const id = req.params.id
+            const query = req.query
             if (!id) {
-                res.status(400).json({ message: 'ID is required' });
+                res.status(400).json({ message: 'ID is required' })
                 return
             }
-            const result = this.exampleService.delete(id, query);
+            const result = this.exampleService.delete(id, query)
             if (!result) {
-                res.status(404).json({ message: 'Object not found'})
+                res.status(404).json({ message: 'Object not found' })
                 return
             }
-            res.status(200).json(result);
-        } catch (error: any) {
-            res.status(500).json({ message: error.message });
+            res.status(200).json(result)
+        } catch (error: unknown) {
+            const errorMessage = getErrorMessage(error)
+            res.status(500).json({ message: errorMessage })
         }
     }
 
@@ -164,10 +171,11 @@ class ExampleController {
             res.status(200).json({
                 message: "Rota funcionando!"
             })
-        } catch (error: any) {
-            res.status(500).json({ message: error.message });
+        } catch (error: unknown) {
+            const errorMessage = getErrorMessage(error)
+            res.status(500).json({ message: errorMessage })
         }
     }
 }
 
-export default ExampleController;
+export default ExampleController

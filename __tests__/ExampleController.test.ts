@@ -1,4 +1,4 @@
-import request from "supertest";
+import request from "supertest"
 import app from "../src/app"
 
 describe("Testando rotas http://0.0.0.0:0000/api/example", () => {
