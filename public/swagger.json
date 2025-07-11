@@ -1,0 +1,307 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentação da API",
+        "version": "1.0.0",
+        "description": "API construída com Express e Swagger"
+    },
+    "paths": {
+        "/api/example/get": {
+            "get": {
+                "summary": "Pega varios objetos.",
+                "description": "Rota de exemplo de GET para pegar varios objetos.",
+                "tags": [
+                    "Exemplos"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "amount",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Objetos encontrados com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "user123"
+                                            },
+                                            "example": {
+                                                "type": "string",
+                                                "example": "test"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Objetos não encontrados"
+                    },
+                    "500": {
+                        "description": "Erro"
+                    }
+                }
+            }
+        },
+        "/api/example/get/{id}": {
+            "get": {
+                "summary": "Pega um objeto.",
+                "description": "Rota de exemplo de GET para pegar um objeto especifico.",
+                "tags": [
+                    "Exemplos"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Objeto encontrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "user123"
+                                        },
+                                        "example": {
+                                            "type": "string",
+                                            "example": "test"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ID é obrigatório"
+                    },
+                    "404": {
+                        "description": "Objeto não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro"
+                    }
+                }
+            }
+        },
+        "/api/example/put/{id}": {
+            "put": {
+                "summary": "Atualiza um objeto.",
+                "description": "Rota de exemplo de PUT para atualizar um objeto.",
+                "tags": [
+                    "Exemplos"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "example": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Objeto atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Updated resource with ID 8 successfully!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ID e Body é obrigatório"
+                    },
+                    "404": {
+                        "description": "Objeto não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro"
+                    }
+                }
+            }
+        },
+        "/api/example/patch/{id}": {
+            "patch": {
+                "summary": "Atualiza uma pequena parte do objeto.",
+                "description": "Rota de exemplo de PATCH para atualizar uma pequena parte de objeto.",
+                "tags": [
+                    "Exemplos"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "example": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Objeto atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Patched resource with ID 12 successfully!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ID e Body é obrigatório"
+                    },
+                    "404": {
+                        "description": "Objeto não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro"
+                    }
+                }
+            }
+        },
+        "/api/example/delete/{id}": {
+            "delete": {
+                "summary": "Deleta um objeto.",
+                "description": "Rota de exemplo de DELETE para apagar um algum objeto.",
+                "tags": [
+                    "Exemplos"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Objeto deletado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted resource with ID 42 successfully!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/example": {
+            "get": {
+                "summary": "Teste de conectividade",
+                "description": "Rota para testar se as rotas `/example` estão funcionando.",
+                "tags": [
+                    "Exemplos"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso ao conectar com a rota",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Rota funcionando!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro"
+                    }
+                }
+            }
+        }
+    },
+    "components": {},
+    "tags": []
+}
