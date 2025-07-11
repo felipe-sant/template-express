@@ -10,6 +10,7 @@
         "tsconfig.json": true,
         "LICENSE": true,
         "jest.config.js": true,
-        "vercel.json": true
+        "vercel.json": true,
+        ".github": true
     }
 }

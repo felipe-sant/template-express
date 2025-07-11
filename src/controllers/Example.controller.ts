@@ -71,7 +71,7 @@ class ExampleController {
     }
 
     /**
-     * `PUT | http://0.0.0.0:0000/api/example/update/:id`
+     * `PUT | http://0.0.0.0:0000/api/example/put/:id`
      * @param req Possui parametros de ID, Query e Body.
      * @returns Retorna se o objeto foi atualizado com sucesso ou erro.
      * @description Rota de exemplo para atualizar um objeto.
