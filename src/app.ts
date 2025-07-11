@@ -10,6 +10,6 @@ app.use(express.json())
 
 app.get('/', (_, res) => { res.redirect('/docs/routes.html')})
 app.use('/api', exampleRoutes)
-app.use('/docs', express.static(path.join(__dirname, "../public")))
+app.use('/docs', express.static(path.join(__dirname, "../__docs__")))
 
 export default app
