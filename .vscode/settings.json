@@ -1,3 +1,15 @@
 {
     "git.enabled": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        ".gitignore": true,
+        ".vscode": true,
+        "README.md": true,
+        "package-lock.json": true,
+        "tsconfig.json": true,
+        "LICENSE": true,
+        "jest.config.js": true,
+        "vercel.json": true
+    }
 }
