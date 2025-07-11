@@ -5,10 +5,12 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
         "outDir": "./dist"
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "__tests__"
     ],
     "exclude": [
         "node_modules"
