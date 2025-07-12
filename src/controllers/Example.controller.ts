@@ -20,7 +20,7 @@ class ExampleController {
             const query = req.query
             const body = req.body as unknown
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: 'Body is required' })
+                res.status(400).json({ message: req.t("body_is_required") })
                 return
             }
             const result = this.exampleService.create(body, query)
@@ -59,12 +59,12 @@ class ExampleController {
             const id = req.params.id
             const query = req.query
             if (!id) {
-                res.status(400).json({ message: 'ID is required' })
+                res.status(400).json({ message: req.t("body_is_required") })
                 return
             }
             const result = this.exampleService.readOne(id, query)
             if (!result) {
-                res.status(404).json({ message: 'Object not found' })
+                res.status(404).json({ message: req.t("object_not_found") })
                 return
             }
             res.status(200).json(result)
@@ -86,16 +86,16 @@ class ExampleController {
             const query = req.query
             const body = req.body as unknown
             if (!id) {
-                res.status(400).json({ message: 'ID is required' })
+                res.status(400).json({ message: req.t("id_is_required") })
                 return
             }
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: 'Body is required' })
+                res.status(400).json({ message: req.t("body_is_required") })
                 return
             }
             const result = this.exampleService.update(id, body, query)
             if (!result) {
-                res.status(404).json({ message: 'Object not found' })
+                res.status(404).json({ message: req.t("object_not_found") })
                 return
             }
             res.status(200).json(result)
@@ -117,16 +117,16 @@ class ExampleController {
             const query = req.query
             const body = req.body as unknown
             if (!id) {
-                res.status(400).json({ message: 'ID is required' })
+                res.status(400).json({ message: req.t("id_is_required") })
                 return
             }
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: 'Body is required' })
+                res.status(400).json({ message: req.t("body_is_required") })
                 return
             }
             const result = this.exampleService.patch(id, body, query)
             if (!result) {
-                res.status(404).json({ message: 'Object not found' })
+                res.status(404).json({ message: req.t("object_not_found") })
                 return
             }
             res.status(200).json(result)
@@ -147,12 +147,12 @@ class ExampleController {
             const id = req.params.id
             const query = req.query
             if (!id) {
-                res.status(400).json({ message: 'ID is required' })
+                res.status(400).json({ message: req.t("id_is_required") })
                 return
             }
             const result = this.exampleService.delete(id, query)
             if (!result) {
-                res.status(404).json({ message: 'Object not found' })
+                res.status(404).json({ message: req.t("object_not_found") })
                 return
             }
             res.status(204).json(result)
@@ -166,10 +166,10 @@ class ExampleController {
      * `GET | http://0.0.0.0:0000/api/example`
      * @description Teste de funcionamento da rota.
      */
-    async __test__(_: Request, res: Response): Promise<void> {
+    async __test__(req: Request, res: Response): Promise<void> {
         try {
             res.status(200).json({
-                message: "Rota funcionando!"
+                message: req.t("successful_route_connection")
             })
         } catch (error: unknown) {
             const errorMessage = getErrorMessage(error)

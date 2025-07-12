@@ -1,0 +1,7 @@
+{
+    "successful_route_connection": "A API está funcionando!",
+    "id_is_required": "ID é obrigatório.",
+    "query_is_required": "Query é obrigatória.",
+    "body_is_required": "Body é obrigatório.",
+    "object_not_found": "Objeto não encontrado."
+}
