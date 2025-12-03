@@ -6,18 +6,26 @@
   "scripts": {
     "start": "node out/index.js",
     "build": "tsc -p tsconfig.json --outDir out",
-    "dev": "nodemon --watch src --ext ts --exec \"ts-node src/index.ts\""
+    "dev": "nodemon --watch src --ext ts --exec \"ts-node src/index.ts\"",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "@felipe-sant",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^22.5.4",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.48.1"
   },
   "dependencies": {
     "cors": "^2.8.5",
