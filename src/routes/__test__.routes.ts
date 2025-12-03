@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import TestController from "../controllers/__test.controller";
+import TestController from "../controllers/__test__.controller";
 
 class TestRoutes {
     private testController: TestController

@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import requestLoggerMiddleware from './middleware/requestLogger.middleware'
-import testRoutes from './routes/__test.routes'
+import testRoutes from './routes/__test__.routes'
 
 const app = express()
 
