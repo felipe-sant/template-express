@@ -15,6 +15,10 @@ class TestController {
         try {
             const query = req.query
             const body = req.body
+            if (!body || Object.keys(body).length === 0) {
+                res.status(400).json({ message: "body is required!" })
+                return
+            }
             const result = this.testService.create(body, query)
             res.status(201).json(result)
         } catch (error: unknown) {
@@ -31,8 +35,8 @@ class TestController {
             const id = req.params.id
             const query = req.query
             const body = req.body
-            if (!id) {
-                res.status(400).json({ message: "id is required!" })
+            if (!body || Object.keys(body).length === 0) {
+                res.status(400).json({ message: "body is required!" })
                 return
             }
             const result = this.testService.update(id, body, query)
@@ -64,10 +68,6 @@ class TestController {
         try {
             const id = req.params.id
             const query = req.query
-            if (!id) {
-                res.status(400).json({ message: "id is required!" })
-                return
-            }
             const result = this.testService.readOne(id, query)
             res.status(200).json(result)
         } catch (error: unknown) {
