@@ -2,6 +2,9 @@ import express, { Request, Response } from 'express'
 import cors from 'cors'
 import requestLoggerMiddleware from './middleware/requestLogger.middleware'
 import testRoutes from './routes/__test__.routes'
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const app = express()
 
