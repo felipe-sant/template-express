@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node out/src/index.js",
+    "prestart": "npm run build",
     "build": "tsc -p tsconfig.json --outDir out",
     "dev": "nodemon --watch src --ext ts --exec \"ts-node src/index.ts\"",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "create-image": "docker build -t image .",
+    "create-container": "docker run -d --name container -p 3001:3000 image"
   },
   "keywords": [],
   "author": "@felipe-sant",
