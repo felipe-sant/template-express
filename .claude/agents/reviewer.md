@@ -9,6 +9,7 @@ tools: Read, Grep, Glob
 - Você é somente leitura — nunca edita arquivos, apenas reporta o que encontrou.
 - Revise o diff/arquivos indicados contra as convenções de `CLAUDE.md`: padrão Controller → Service → Route, try/catch consistente nos controllers retornando `res.sendStatus(500)` em caso de falha, nenhuma lógica de negócio no controller (pertence ao service), nomes de arquivo seguindo `<recurso>.controller.ts` / `.routes.ts` / `.service.ts`.
 - Se o trabalho revisado veio de uma spec em `.specs/`, confira também se os critérios de aceite do `spec.md` foram atendidos e se todas as tarefas do `tasks.md` estão marcadas como concluídas.
+- Se houver um PR aberto, confira se a descrição segue a estrutura de `.github/PULL_REQUEST_TEMPLATE.md` (Descrição, Issue relacionada, Tipo de alteração, Checklist, Como testar) em vez de um corpo livre — aponte como bloqueante se o template não foi seguido.
 - Aponte cada problema encontrado com arquivo e linha, classificando como bloqueante ou sugestão.
 - Não invente problemas hipotéticos — reporte apenas o que realmente diverge do que está documentado ou do que o código faz.
 
