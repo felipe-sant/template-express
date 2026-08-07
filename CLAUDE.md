@@ -39,6 +39,10 @@ Para adicionar um novo recurso, copie o trio controller/route/service `__test__`
 - `vercel.json` restringe deploy automático à branch `main` via `git.deploymentEnabled` (`"main": true, "*": false`) — push em outras branches não dispara preview deployment.
 - O `Dockerfile` é um build em dois estágios: compila com `tsc` em um estágio builder, depois copia `out/` e `.env` para um estágio de produção mais leve. Se um projeto não tiver `.env`, remova a linha `COPY .env ./` (observação já indicada inline no Dockerfile).
 
+## Padrão de branches, commits e PRs
+
+Toda branch, commit e PR deste repositório segue o padrão definido em `CONTRIBUTING.md`: branches como `<tipo>/<número-da-issue>-<descrição-curta>` (ex.: `fix/17-request-logger-appendfile`) e commits como `<Tipo> <ícone> [#<número-da-issue>] <descrição>` (ex.: `Fix :bug: [#17] ...`), usando um dos tipos da tabela de `CONTRIBUTING.md` (Fix, Feat, Hotfix, Refactor, Test, Perf, Style, Docs, Build, Chore, Revert) — não use labels do GitHub (ex.: `enhancement`) como `<tipo>` da branch/commit. A descrição do PR segue a estrutura de `.github/PULL_REQUEST_TEMPLATE.md` (Descrição, Issue relacionada, Tipo de alteração, Checklist, Como testar), não um corpo livre.
+
 ## Tooling de IA (skills, agents e spec-driven)
 
 - `.claude/skills/` — pacotes de conhecimento carregáveis a pedido (`express-resource-scaffold`, `express-request-logging`), complementando este arquivo com o passo a passo detalhado de cada convenção.
