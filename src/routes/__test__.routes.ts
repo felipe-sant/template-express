@@ -43,7 +43,7 @@ class TestRoutes {
         )
 
         // `GET | http://0.0.0.0:0000/api/test/_`
-        this.router.propfind(
+        this.router.get(
             this.url_test,
             this.testController.__test__.bind(this.testController)
         )
