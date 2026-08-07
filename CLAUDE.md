@@ -37,3 +37,9 @@ Para adicionar um novo recurso, copie o trio controller/route/service `__test__`
 - O `.env` é carregado via `dotenv` em `src/app.ts`; existe um `.env.example` como template. O `src/index.ts` atualmente fixa a porta em `3000` em vez de lê-la do ambiente.
 - O `vercel.json` builda `src/index.ts` diretamente com `@vercel/node` e roteia todos os caminhos para ele — isso ignora o build `npm run build`/pasta `out` usado pelo Docker/`npm start`.
 - O `Dockerfile` é um build em dois estágios: compila com `tsc` em um estágio builder, depois copia `out/` e `.env` para um estágio de produção mais leve. Se um projeto não tiver `.env`, remova a linha `COPY .env ./` (observação já indicada inline no Dockerfile).
+
+## Tooling de IA (skills, agents e spec-driven)
+
+- `.claude/skills/` — pacotes de conhecimento carregáveis a pedido (`express-resource-scaffold`, `express-request-logging`), complementando este arquivo com o passo a passo detalhado de cada convenção.
+- `.claude/agents/` — três papéis que formam o fluxo planejar → revisar → executar: `sdd` (só planeja, escreve `spec.md`/`tasks.md` em `.specs/`, nunca toca em `src/`), `executor` (implementa um `tasks.md` já aprovado) e `reviewer` (audita o resultado contra as convenções deste arquivo, somente leitura).
+- `.specs/` — pastas de spec por feature/bug (`.specs/features/<slug>/`, `.specs/bugs/<slug>/`), a partir do template em `.specs/_template/`. Fluxo: `sdd` escreve a spec → aprovação humana → `executor` implementa task por task → `reviewer` audita antes do commit/PR.
