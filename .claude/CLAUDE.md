@@ -42,7 +42,7 @@ Para adicionar um novo recurso, copie o trio controller/route/service `__test__`
 
 ## Padrão de branches, commits e PRs
 
-Toda branch, commit e PR deste repositório segue o padrão definido em `CONTRIBUTING.md`: branches como `<tipo>/<número-da-issue>-<descrição-curta>` (ex.: `fix/17-request-logger-appendfile`) e commits como `<Tipo> <ícone> [#<número-da-issue>] <descrição>` (ex.: `Fix :bug: [#17] ...`), usando um dos tipos da tabela de `CONTRIBUTING.md` (Fix, Feat, Hotfix, Refactor, Test, Perf, Style, Docs, Build, Chore, Revert) — não use labels do GitHub (ex.: `enhancement`) como `<tipo>` da branch/commit. A descrição do PR segue a estrutura de `.github/PULL_REQUEST_TEMPLATE.md` (Descrição, Issue relacionada, Tipo de alteração, Checklist, Como testar), não um corpo livre.
+Toda branch, commit e PR deste repositório segue o padrão definido em `CONTRIBUTING.md`: branches como `<tipo>/<número-da-issue>-<descrição-curta>` (ex.: `fix/17-request-logger-appendfile`) e commits como `<Tipo> <ícone> [#<número-da-issue>] <descrição>` (ex.: `Fix :bug: [#17] ...`), usando um dos tipos da tabela de `CONTRIBUTING.md` (Fix, Feat, Hotfix, Refactor, Test, Perf, Style, Docs, Build, Chore, Revert) — não use labels do GitHub (ex.: `enhancement`) como `<tipo>` da branch/commit. A descrição do PR segue a estrutura de `.github/PULL_REQUEST_TEMPLATE.md` (Descrição, Alterações, Decisões técnicas, Como testar, Evidências, Impactos e pontos de atenção), não um corpo livre.
 
 ## Convenção de tipagem
 
