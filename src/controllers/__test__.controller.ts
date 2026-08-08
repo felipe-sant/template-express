@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
-import TestService from "../services/__test__.service";
+import { Request, Response } from "express"
+import TestService from "../services/__test__.service"
+import { TestResourceBody, TestResourceQuery } from "../types/testResource.types"
 
 class TestController {
     private testService: TestService
@@ -13,11 +14,11 @@ class TestController {
      */
     public async create(req: Request, res: Response): Promise<void> {
         try {
-            const query = req.query as Record<string, string>
+            const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
-            
-            const body = req.body
+
+            const body = req.body as TestResourceBody
             if (!body || Object.keys(body).length === 0) {
                 res.status(400).json({ message: "body is required!" })
                 return
@@ -37,11 +38,11 @@ class TestController {
         try {
             const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
 
-            const query = req.query as Record<string, string>
+            const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
 
-            const body = req.body
+            const body = req.body as TestResourceBody
             if (!body || Object.keys(body).length === 0) {
                 res.status(400).json({ message: "body is required!" })
                 return
@@ -59,7 +60,7 @@ class TestController {
      */
     public async read(req: Request, res: Response): Promise<void> {
         try {
-            const query = req.query as Record<string, string>
+            const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
 
@@ -78,7 +79,7 @@ class TestController {
         try {
             const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
 
-            const query = req.query as Record<string, string>
+            const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
 
@@ -97,7 +98,7 @@ class TestController {
         try {
             const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
 
-            const query = req.query as Record<string, string>
+            const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
 
@@ -112,7 +113,7 @@ class TestController {
     /**
      * `GET | http://0.0.0.0:0000/api/test/_`
      */
-    public async __test__(_: Request, res: Response) {
+    public async __test__(_: Request, res: Response): Promise<void> {
         try {
             const testService = this.testService.__test__()
             if (testService) {

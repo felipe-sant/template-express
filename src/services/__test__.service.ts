@@ -1,50 +1,56 @@
+import {
+    TestResourceBody,
+    TestResourceQuery,
+    TestResourceResponse,
+} from "../types/testResource.types"
+
 class TestService {
-    create(body: unknown, query?: unknown) {
+    create(body: TestResourceBody, query?: TestResourceQuery): TestResourceResponse {
         return {
             message: "Resource created successfully!",
             query: query,
-            body: body
+            body: body,
         }
     }
 
-    read(query?: unknown) {
+    read(query?: TestResourceQuery): TestResourceResponse {
         return {
             message: "Retrieved resources successfully!",
-            query: query
+            query: query,
         }
     }
 
-    readOne(id: string, query?: unknown) {
+    readOne(id: string, query?: TestResourceQuery): TestResourceResponse {
         return {
             message: `Retrieved resource with ID ${id} successfully!`,
-            query: query
+            query: query,
         }
     }
 
-    update(id: string, body: unknown, query?: unknown) {
+    update(id: string, body: TestResourceBody, query?: TestResourceQuery): TestResourceResponse {
         return {
             message: `Updated resource with ID ${id} successfully!`,
             query: query,
-            body: body
+            body: body,
         }
     }
 
-    patch(id: string, body: unknown, query?: unknown) {
+    patch(id: string, body: TestResourceBody, query?: TestResourceQuery): TestResourceResponse {
         return {
             message: `Patched resource with ID ${id} successfully!`,
             query: query,
-            body: body
+            body: body,
         }
     }
 
-    delete(id: string, query?: unknown) {
+    delete(id: string, query?: TestResourceQuery): TestResourceResponse {
         return {
             message: `Deleted resource with ID ${id} successfully!`,
-            query: query
+            query: query,
         }
     }
 
-    public __test__() {
+    public __test__(): boolean {
         return true
     }
 }
