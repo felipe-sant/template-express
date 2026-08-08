@@ -18,6 +18,14 @@ tools: Read, Grep, Glob, Write
 
 Siga o `CLAUDE.md` do projeto: padrão Controller → Service → Route, service concentrando a lógica de negócio, controller fazendo apenas parsing/validação mínima e delegando ao service.
 
+Ao descrever tarefas/critérios de aceite que envolvam código, considere estas normas de qualidade como já vigentes no projeto (não proponha nem aceite código fora delas):
+
+- ESLint com `globals.node` e Prettier (`.prettierrc`, `npm run format`) integrados via `eslint-config-prettier` — qualquer tarefa que gere/edite código deve passar por `npm run lint` e `npm run format -- --check`.
+- Checks do `tsconfig.json` ativos: `noUnusedLocals`, `noUnusedParameters`, `noImplicitReturns`, `noFallthroughCasesInSwitch`, `noImplicitOverride`, `noUncheckedIndexedAccess` — não descreva código que deixaria variáveis/parâmetros não usados, caminhos sem retorno, ou acesso indexado (`req.params`/`req.query`) sem tratar o `undefined`.
+- Toda chamada a um método `async` de um service dentro de um controller deve usar `await`.
+- Tipos nomeados em `src/types/*.types.ts` para body/query/response, em vez de `unknown` genérico ou literais inline repetidos.
+- Paridade entre as três camadas do scaffold: todo verbo implementado no service deve ter método no controller e rota registrada (e vice-versa).
+
 ## Consome
 
 Um pedido em linguagem natural (feature ou bug).

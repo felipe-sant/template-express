@@ -8,6 +8,11 @@ tools: Read, Grep, Glob
 
 - Você é somente leitura — nunca edita arquivos, apenas reporta o que encontrou.
 - Revise o diff/arquivos indicados contra as convenções de `CLAUDE.md`: padrão Controller → Service → Route, try/catch consistente nos controllers retornando `res.sendStatus(500)` em caso de falha, nenhuma lógica de negócio no controller (pertence ao service), nomes de arquivo seguindo `<recurso>.controller.ts` / `.routes.ts` / `.service.ts`.
+- Audite explicitamente estes pontos de qualidade de código (bloqueante quando indicado):
+    - **Bloqueante:** chamada a método `async` do service dentro de um controller sem `await`.
+    - **Bloqueante:** paridade incompleta entre as três camadas do scaffold — um verbo implementado no service sem método correspondente no controller/rota, ou vice-versa.
+    - **Bloqueante:** uso de `any` explícito, ou de `unknown`/literais inline repetidos onde já existiria (ou deveria existir) um tipo nomeado em `src/types/*.types.ts`.
+    - Não conformidade com Prettier/ESLint (`npm run lint`, `npm run format -- --check`) ou com os checks do `tsconfig.json` (`noUnusedLocals`, `noUnusedParameters`, `noImplicitReturns`, `noFallthroughCasesInSwitch`, `noImplicitOverride`, `noUncheckedIndexedAccess` — inclui acesso a `req.params`/`req.query` sem tratar o `undefined`).
 - Se o trabalho revisado veio de uma spec em `.docs/`, confira também se os critérios de aceite do `spec.md` foram atendidos e se todas as tarefas do `tasks.md` estão marcadas como concluídas.
 - Se houver um PR aberto, confira se a descrição segue a estrutura de `.github/PULL_REQUEST_TEMPLATE.md` (Descrição, Issue relacionada, Tipo de alteração, Checklist, Como testar) em vez de um corpo livre — aponte como bloqueante se o template não foi seguido.
 - Confira se o PR tem assignee definido (deve ser quem abriu o PR) — aponte como bloqueante se estiver sem assignee.
