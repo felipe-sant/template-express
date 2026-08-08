@@ -8,7 +8,11 @@ dotenv.config()
 
 const app = express()
 
-app.use(cors())
+const allowedOrigins = (process.env.CORS_ORIGIN ?? "")
+  .split(",")
+  .filter((origin) => origin !== "")
+
+app.use(cors({ origin: allowedOrigins }))
 app.use(express.json())
 app.use(requestLoggerMiddleware)
 
