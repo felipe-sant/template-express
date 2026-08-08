@@ -1,21 +1,22 @@
 import { Request, Response, NextFunction } from "express";
 import { randomUUID } from "node:crypto";
 import appendFile from "../utils/appendFile";
+import { RequestLogEntry } from "../types/requestLog.types";
 
-async function createLogger(log: {date: string, method: string, url: string, status: number, duration: string, ip: string | undefined, userAgent: string | undefined, requestId: string}) {
+async function createLogger(log: RequestLogEntry): Promise<void> {
     const path = "request.log"
     const content = JSON.stringify(log) + "\n"
     appendFile(path, content)
 }
 
-function requestLoggerMiddleware(req: Request, res: Response, next: NextFunction) {
+function requestLoggerMiddleware(req: Request, res: Response, next: NextFunction): void {
     const start = Date.now();
     const requestId = randomUUID();
 
     res.on("finish", () => {
         const duration = Date.now() - start;
         const now = new Date()
-        const log = {
+        const log: RequestLogEntry = {
             date: now.toLocaleString("pt-br"),
             method: req.method,
             url: req.originalUrl,
