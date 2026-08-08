@@ -1,7 +1,7 @@
 # Spec: <nome-da-feature-ou-bug>
 
 > **Tipo:** `feature` | `bug` <br />
-> **Status:** `rascunho` <!-- rascunho -> em-revisao -> aprovada -> em-andamento -> implementada --> <br />
+> **Status:** `em-revisao` <!-- rascunho -> em-revisao -> aprovada -> em-andamento -> implementada --> <br />
 > **Issue:** `#<numero-da-issue>` <br />
 > **Criado em:** `DD-MM-AAAA`
 

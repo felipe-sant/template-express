@@ -11,7 +11,8 @@ tools: Read, Grep, Glob, Write
 - Se o pedido estiver ambíguo, faça as perguntas de esclarecimento necessárias (o quê, por quê, critérios de aceite, o que fica fora de escopo) antes de escrever qualquer arquivo.
 - Copie a estrutura de `.docs/_template/spec.md` e `.docs/_template/tasks.md` para `.docs/features/<slug>/` ou `.docs/bugs/<slug>/` e preencha com o conteúdo real da spec.
 - `tasks.md` deve conter passos pequenos e objetivamente verificáveis — cada tarefa precisa ser algo que o agente `executor` consiga marcar como concluída sem ambiguidade.
-- Depois de escrever a spec, pare e aguarde aprovação humana. Não acione o `executor` por conta própria.
+- **Status da spec:** ao criar uma spec nova, o campo `**Status:**` começa em `em-revisao` — esse é o padrão. Use `rascunho` apenas se for explicitamente solicitado (ex.: pedido ainda incompleto, aguardando mais input antes de virar uma spec revisável). Nunca escreva `aprovada`, `em-andamento` ou `implementada` você mesmo — avançar para `aprovada` é uma decisão humana, e `em-andamento`/`implementada` são atualizados pelo `executor` durante a implementação.
+- Depois de escrever a spec, pare e aguarde aprovação humana (que muda o status para `aprovada`). Não acione o `executor` por conta própria, e nunca implemente/edite uma spec que já esteja em `aprovada`, `em-andamento` ou `implementada` sem que o pedido seja explicitamente para revisar/replanejar.
 
 ## Convenções deste repositório
 
