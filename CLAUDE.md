@@ -34,7 +34,7 @@ Para adicionar um novo recurso, copie o trio controller/route/service `__test__`
 
 ### Ambiente / deploy
 
-- O `.env` é carregado via `dotenv` em `src/app.ts`; existe um `.env.example` como template. O `src/index.ts` atualmente fixa a porta em `3000` em vez de lê-la do ambiente.
+- O `.env` é carregado via `dotenv` em `src/app.ts`; existe um `.env.example` como template. O `src/index.ts` lê a porta de `process.env.PORT`, com fallback para `3000` quando a variável não estiver definida.
 - O `vercel.json` builda `src/index.ts` diretamente com `@vercel/node` e roteia todos os caminhos para ele — isso ignora o build `npm run build`/pasta `out` usado pelo Docker/`npm start`.
 - `vercel.json` restringe deploy automático à branch `main` via `git.deploymentEnabled` (`"main": true, "*": false`) — push em outras branches não dispara preview deployment.
 - O `Dockerfile` é um build em dois estágios: compila com `tsc` em um estágio builder, depois copia `out/` e `.env` para um estágio de produção mais leve. Se um projeto não tiver `.env`, remova a linha `COPY .env ./` (observação já indicada inline no Dockerfile).
