@@ -23,7 +23,7 @@ class TestController {
                 res.status(400).json({ message: "body is required!" })
                 return
             }
-            const result = this.testService.create(body, query)
+            const result = await this.testService.create(body, query)
             res.status(201).json(result)
         } catch (error: unknown) {
             console.error("Error:", error)
@@ -47,7 +47,7 @@ class TestController {
                 res.status(400).json({ message: "body is required!" })
                 return
             }
-            const result = this.testService.update(id, body, query)
+            const result = await this.testService.update(id, body, query)
             res.status(200).json(result)
         } catch (error: unknown) {
             console.error("Error:", error)
@@ -64,7 +64,7 @@ class TestController {
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
 
-            const result = this.testService.read(query)
+            const result = await this.testService.read(query)
             res.status(200).json(result)
         } catch (error: unknown) {
             console.error("Error:", error)
@@ -83,7 +83,7 @@ class TestController {
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
 
-            const result = this.testService.readOne(id, query)
+            const result = await this.testService.readOne(id, query)
             res.status(200).json(result)
         } catch (error: unknown) {
             console.error("Error:", error)
@@ -102,7 +102,7 @@ class TestController {
             // Caso usar o query usar da seguinte forma:
             // const name = Array.isArray(query.name) ? query.name[0] : query.name
 
-            const result = this.testService.delete(id, query)
+            const result = await this.testService.delete(id, query)
             res.status(204).json(result)
         } catch (error: unknown) {
             console.error("Error:", error)
