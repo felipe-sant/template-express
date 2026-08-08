@@ -57,6 +57,7 @@ Chore :see_no_evil: Atualiza .gitignore
 ## Pull Requests
 
 - Toda alteração passa por PR para a `main` — sem push direto.
-- Ao abrir o PR, preencha: **reviewers**, **assignees** e **labels** (use as labels já existentes no repositório: `bug`, `enhancement`, `documentation`, etc.).
+- Ao abrir o PR, preencha: **assignees** e **labels** (use as labels já existentes no repositório: `bug`, `enhancement`, `documentation`, etc.).
+  - **Assignee**: por padrão, o autor do PR se auto-atribui já na criação (ex.: `gh pr create --assignee @me`), sem depender de edição posterior.
 - Referencie a issue relacionada na descrição (ex.: `Closes #17`) para que ela seja fechada automaticamente no merge.
 - O título do PR segue o mesmo padrão do commit principal (`<Tipo> <ícone> [#<número>] <descrição>`).
