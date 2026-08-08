@@ -6,9 +6,9 @@
         ".gitignore": false,
         ".vscode": true,
         "README.md": false,
-        "package-lock.json": true,
+        "package-lock.json": false,
         "package.json": false,
-        "tsconfig.json": true,
-        "LICENSE": true,
+        "tsconfig.json": false,
+        "LICENSE": true
     }
 }
