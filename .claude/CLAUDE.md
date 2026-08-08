@@ -4,7 +4,7 @@ Este arquivo fornece orientações ao Claude Code (claude.ai/code) para trabalha
 
 ## Visão geral do projeto
 
-Este é um boilerplate/template para APIs Express + TypeScript. Os arquivos com prefixo `__test__` (`__test__.controller.ts`, `__test__.routes.ts`, `__test__.service.ts`) não são testes de fato — são um módulo de referência/scaffold que demonstra o padrão Controller → Service → Route que novas features devem copiar. Não há framework de testes configurado neste repositório (sem jest/mocha/vitest), apesar do nome `__test__`.
+Este é um boilerplate/template para APIs Express + TypeScript. Os arquivos com prefixo `__test__` (`__test__.controller.ts`, `__test__.routes.ts`, `__test__.service.ts`) não são testes de fato — são um **exemplo de guia** que demonstra o padrão Controller → Service → Route, pensado para o usuário do template copiar/adaptar ao criar seus próprios recursos. Não é uma peça permanente da aplicação: pode ser removido depois que recursos reais existirem, e o padrão descrito neste documento continua valendo independentemente de o `__test__` ainda estar presente. Não há framework de testes configurado neste repositório (sem jest/mocha/vitest), apesar do nome `__test__`.
 
 ## Comandos
 
@@ -27,7 +27,7 @@ Estrutura em camadas por recurso, conectadas em `src/app.ts`:
 - **Services** (`src/services/*.service.ts`) — uma classe simples contendo a lógica de negócio, atualmente retornando dados mock/echo no template. É aqui que entraria a persistência/lógica de negócio real.
 - O registro de rotas de um recurso acontece em `src/app.ts` via `app.use("/api/<recurso>", <recurso>Routes)`. Um catch-all `app.use("/", ...)` no final retorna 404 para qualquer coisa não mapeada — novos routers de recursos precisam ser registrados antes dessa linha.
 
-Para adicionar um novo recurso, copie o trio controller/route/service `__test__`, renomeie e registre o novo router em `src/app.ts`.
+Para adicionar um novo recurso, copie o trio controller/route/service `__test__` (se ainda presente neste projeto — é só um exemplo de guia, não obrigatório manter), renomeie e registre o novo router em `src/app.ts`. Ver skill `express-resource-scaffold` para o passo a passo completo.
 
 ### Middleware de log de requisições
 
@@ -51,7 +51,7 @@ O `tsconfig.json` já habilita `strict: true` (o que inclui `noImplicitAny`) e, 
 - Não introduza `any` explícito no código — se um tipo for difícil de expressar, prefira `unknown` com uma checagem, ou modele o tipo corretamente.
 - Tipos de retorno de funções assíncronas e handlers devem ser explícitos, não inferidos (ex.: `async function createLogger(log: RequestLogEntry): Promise<void>`, `function requestLoggerMiddleware(...): void`).
 - Prefira um type/interface nomeado (em `src/types/*.types.ts`) a um literal inline repetido em mais de um lugar (parâmetro de função e objeto montado no call site, por exemplo) — evita duplicação e facilita reuso por outros módulos.
-- Com `noUncheckedIndexedAccess` ativo, todo acesso a um campo individual de `req.params.<campo>` (ex.: `req.params.id`) retorna `string | undefined` — trate isso com uma validação explícita (ex.: `if (!id) { res.status(400)...; return }`), igual ao scaffold `__test__`, em vez de recorrer a `as`/cast para forçar o tipo e mascarar o `undefined`. Já o cast do objeto `req.query`/`req.body` inteiro para um tipo nomeado (ex.: `req.query as TestResourceQuery`) é uma simplificação aceita por ora — o objeto continua sem validação de schema em runtime até a spec de validação de entrada (zod) ser implementada; não confunda essa simplificação com o caso de `req.params.<campo>` acima, que já tem tratamento obrigatório.
+- Com `noUncheckedIndexedAccess` ativo, todo acesso a um campo individual de `req.params.<campo>` (ex.: `req.params.id`) retorna `string | undefined` — trate isso com uma validação explícita (ex.: `if (!id) { res.status(400)...; return }`), igual ao padrão aplicado no scaffold `__test__` (quando presente), em vez de recorrer a `as`/cast para forçar o tipo e mascarar o `undefined`. Já o cast do objeto `req.query`/`req.body` inteiro para um tipo nomeado (ex.: `req.query as TestResourceQuery`) é uma simplificação aceita por ora — o objeto continua sem validação de schema em runtime até a spec de validação de entrada (zod) ser implementada; não confunda essa simplificação com o caso de `req.params.<campo>` acima, que já tem tratamento obrigatório.
 - Toda chamada a um método `async` de um `Service` dentro de um `Controller` deve usar `await` — mesmo que o service atual seja síncrono, omitir o `await` é um bug silencioso no primeiro service que fizer I/O real.
 
 Exemplo já aplicado no repositório: `RequestLogEntry` (`src/types/requestLog.types.ts`) é usado tanto no parâmetro de `createLogger` quanto na variável `log` montada em `requestLoggerMiddleware` (`src/middleware/requestLogger.middleware.ts`), no lugar do literal inline que existia antes. Da mesma forma, `TestResourceBody`/`TestResourceQuery`/`TestResourceResponse` (`src/types/testResource.types.ts`) tipam o body/query/response do scaffold `__test__` em vez de `unknown` genérico.
