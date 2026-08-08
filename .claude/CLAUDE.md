@@ -12,6 +12,7 @@ Este é um boilerplate/template para APIs Express + TypeScript. Os arquivos com 
 - `npm run build` — checa tipos e compila `src` para `out/` via `tsc`.
 - `npm start` — executa `prestart` (build) e depois `node out/src/index.js`. Use isso para rodar o build de produção compilado.
 - `npm run lint` — roda o ESLint no projeto.
+- `npm run format` — roda o Prettier (`prettier --write .`) para reformatar o projeto conforme o `.prettierrc`.
 - `npm run create-image` — builda a imagem Docker (`docker build -t image .`).
 - `npm run create-container` — roda o container Docker, mapeando a porta 3001 do host para a porta 3000 do container.
 
@@ -45,13 +46,22 @@ Toda branch, commit e PR deste repositório segue o padrão definido em `CONTRIB
 
 ## Convenção de tipagem
 
-O `tsconfig.json` já habilita `strict: true` (o que inclui `noImplicitAny`), então o compilador já bloqueia `any` implícito em todo o projeto. Além disso:
+O `tsconfig.json` já habilita `strict: true` (o que inclui `noImplicitAny`) e, além disso, mantém ativos `noUnusedLocals`, `noUnusedParameters`, `noImplicitReturns`, `noFallthroughCasesInSwitch`, `noImplicitOverride` e `noUncheckedIndexedAccess`. Isso significa que o compilador já bloqueia `any` implícito, variáveis/parâmetros não usados, funções sem retorno explícito em todo caminho, fallthrough silencioso em `switch`, overrides não marcados e acesso indexado (`req.query`/`req.params`, arrays, index signatures) sem tratar o `undefined` resultante. Além disso:
 
 - Não introduza `any` explícito no código — se um tipo for difícil de expressar, prefira `unknown` com uma checagem, ou modele o tipo corretamente.
 - Tipos de retorno de funções assíncronas e handlers devem ser explícitos, não inferidos (ex.: `async function createLogger(log: RequestLogEntry): Promise<void>`, `function requestLoggerMiddleware(...): void`).
 - Prefira um type/interface nomeado (em `src/types/*.types.ts`) a um literal inline repetido em mais de um lugar (parâmetro de função e objeto montado no call site, por exemplo) — evita duplicação e facilita reuso por outros módulos.
+- Com `noUncheckedIndexedAccess` ativo, todo acesso a `req.params.<campo>`/`req.query.<campo>` retorna `string | undefined` — trate isso com uma validação explícita (ex.: `if (!id) { res.status(400)...; return }`), igual ao scaffold `__test__`, em vez de recorrer a `as`/cast para forçar o tipo e mascarar o `undefined`.
+- Toda chamada a um método `async` de um `Service` dentro de um `Controller` deve usar `await` — mesmo que o service atual seja síncrono, omitir o `await` é um bug silencioso no primeiro service que fizer I/O real.
 
-Exemplo já aplicado no repositório: `RequestLogEntry` (`src/types/requestLog.types.ts`) é usado tanto no parâmetro de `createLogger` quanto na variável `log` montada em `requestLoggerMiddleware` (`src/middleware/requestLogger.middleware.ts`), no lugar do literal inline que existia antes.
+Exemplo já aplicado no repositório: `RequestLogEntry` (`src/types/requestLog.types.ts`) é usado tanto no parâmetro de `createLogger` quanto na variável `log` montada em `requestLoggerMiddleware` (`src/middleware/requestLogger.middleware.ts`), no lugar do literal inline que existia antes. Da mesma forma, `TestResourceBody`/`TestResourceQuery`/`TestResourceResponse` (`src/types/testResource.types.ts`) tipam o body/query/response do scaffold `__test__` em vez de `unknown` genérico.
+
+## Qualidade de código e formatação
+
+- **ESLint** (`eslint.config.mts`) roda sobre um projeto Node — usa `globals.node` (não `globals.browser`), já que os globals de browser (`window`, `document`, ...) não existem no runtime real.
+- **Prettier** está integrado ao projeto: `.prettierrc` na raiz define o estilo (`semi: false`, `singleQuote: false`, `tabWidth: 4`, `useTabs: false`, `printWidth: 100`, `trailingComma: "all"`), `eslint-config-prettier` está incluído em `eslint.config.mts` para não conflitar com as regras de formatação do ESLint, e `npm run format` (`prettier --write .`) aplica o estilo. Rode `npm run format` antes de finalizar qualquer tarefa que edite código.
+- Todo código novo deve nascer conforme ESLint + Prettier + os checks do `tsconfig.json` (ver "Convenção de tipagem" acima) — não é aceitável escrever primeiro fora do padrão e corrigir depois só na revisão.
+- **Paridade CRUD do scaffold:** cada verbo implementado no `Service` (`create`/`read`/`readOne`/`update`/`patch`/`delete`) deve ter um método correspondente no `Controller` e uma rota registrada em `Routes` — se um novo recurso não precisar de um verbo, remova-o das três camadas em conjunto, não deixe implementado em uma camada e ausente nas outras (como acontecia com `PATCH` no scaffold `__test__` antes de `TestController`/`TestRoutes` expô-lo).
 
 ## Tooling de IA (skills, agents e spec-driven)
 
