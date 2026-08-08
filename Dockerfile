@@ -2,11 +2,11 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json tsconfig.json ./
+COPY package.json package-lock.json tsconfig.json ./
+
+RUN npm ci
 
 COPY src ./src
-
-RUN npm install
 
 RUN npm run build
 
@@ -16,12 +16,12 @@ WORKDIR /app
 
 COPY --from=builder /app/out ./out
 
-COPY package.json ./
+COPY package.json package-lock.json ./
 
 # Remover caso não tenha o .env
 COPY .env ./
 
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 
 EXPOSE 3000
 
