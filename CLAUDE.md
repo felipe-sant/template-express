@@ -46,5 +46,5 @@ Toda branch, commit e PR deste repositório segue o padrão definido em `CONTRIB
 ## Tooling de IA (skills, agents e spec-driven)
 
 - `.claude/skills/` — pacotes de conhecimento carregáveis a pedido (`express-resource-scaffold`, `express-request-logging`), complementando este arquivo com o passo a passo detalhado de cada convenção.
-- `.claude/agents/` — três papéis que formam o fluxo planejar → revisar → executar: `sdd` (só planeja, escreve `spec.md`/`tasks.md` em `.specs/`, nunca toca em `src/`), `executor` (implementa um `tasks.md` já aprovado) e `reviewer` (audita o resultado contra as convenções deste arquivo, somente leitura).
-- `.specs/` — pastas de spec por feature/bug (`.specs/features/<slug>/`, `.specs/bugs/<slug>/`), a partir do template em `.specs/_template/`. Fluxo: `sdd` escreve a spec → aprovação humana → `executor` implementa task por task → `reviewer` audita antes do commit/PR.
+- `.claude/agents/` — três papéis que formam o fluxo planejar → revisar → executar: `sdd` (só planeja, escreve `spec.md`/`tasks.md` em `.docs/`, nunca toca em `src/`), `executor` (implementa um `tasks.md` já aprovado) e `reviewer` (audita o resultado contra as convenções deste arquivo, somente leitura).
+- `.docs/` — pastas de spec por feature/bug (`.docs/features/<slug>/`, `.docs/bugs/<slug>/`), a partir do template em `.docs/_template/`. Fluxo: `sdd` escreve a spec → aprovação humana → `executor` implementa task por task → `reviewer` audita antes do commit/PR.
