@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import { randomUUID } from "node:crypto";
-import appendFile from "../utils/appendFile";
-import { RequestLogEntry } from "../types/requestLog.types";
+import { Request, Response, NextFunction } from "express"
+import { randomUUID } from "node:crypto"
+import appendFile from "../utils/appendFile"
+import { RequestLogEntry } from "../types/requestLog.types"
 
 async function createLogger(log: RequestLogEntry): Promise<void> {
     const path = "request.log"
@@ -10,11 +10,11 @@ async function createLogger(log: RequestLogEntry): Promise<void> {
 }
 
 function requestLoggerMiddleware(req: Request, res: Response, next: NextFunction): void {
-    const start = Date.now();
-    const requestId = randomUUID();
+    const start = Date.now()
+    const requestId = randomUUID()
 
     res.on("finish", () => {
-        const duration = Date.now() - start;
+        const duration = Date.now() - start
         const now = new Date()
         const log: RequestLogEntry = {
             date: now.toLocaleString("pt-br"),
@@ -24,12 +24,12 @@ function requestLoggerMiddleware(req: Request, res: Response, next: NextFunction
             duration: `${duration}ms`,
             ip: req.ip,
             userAgent: req.headers["user-agent"],
-            requestId
+            requestId,
         }
         createLogger(log)
-    });
+    })
 
-    next();
+    next()
 }
 
 export default requestLoggerMiddleware

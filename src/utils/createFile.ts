@@ -1,4 +1,4 @@
-import { writeFile } from "fs/promises";
+import { writeFile } from "fs/promises"
 
 async function createFile(path: string, content: string): Promise<void> {
     try {
