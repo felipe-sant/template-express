@@ -9,6 +9,7 @@
         "package-lock.json": false,
         "package.json": false,
         "tsconfig.json": false,
-        "LICENSE": true
+        "LICENSE": true,
+        "**/.gitkeep": true
     }
 }
