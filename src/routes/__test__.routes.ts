@@ -18,6 +18,9 @@ class TestRoutes {
         // `PUT | http://0.0.0.0:0000/api/test/:id`
         this.router.put(this.url_id, this.testController.update.bind(this.testController))
 
+        // `PATCH | http://0.0.0.0:0000/api/test/:id`
+        this.router.patch(this.url_id, this.testController.patch.bind(this.testController))
+
         // `GET | http://0.0.0.0:0000/api/test`
         this.router.get(this.url, this.testController.read.bind(this.testController))
 

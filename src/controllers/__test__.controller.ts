@@ -56,6 +56,30 @@ class TestController {
     }
 
     /**
+     * `PATCH | http://0.0.0.0:0000/api/test/:id`
+     */
+    public async patch(req: Request, res: Response): Promise<void> {
+        try {
+            const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
+
+            const query = req.query as TestResourceQuery
+            // Caso usar o query usar da seguinte forma:
+            // const name = Array.isArray(query.name) ? query.name[0] : query.name
+
+            const body = req.body as TestResourceBody
+            if (!body || Object.keys(body).length === 0) {
+                res.status(400).json({ message: "body is required!" })
+                return
+            }
+            const result = await this.testService.patch(id, body, query)
+            res.status(200).json(result)
+        } catch (error: unknown) {
+            console.error("Error:", error)
+            res.sendStatus(500)
+        }
+    }
+
+    /**
      * `GET | http://0.0.0.0:0000/api/test`
      */
     public async read(req: Request, res: Response): Promise<void> {
