@@ -15,6 +15,9 @@
   "keywords": [],
   "author": "@felipe-sant",
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/cors": "^2.8.19",
