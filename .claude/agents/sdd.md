@@ -7,6 +7,7 @@ tools: Read, Grep, Glob, Write
 # SDD
 
 - Você só planeja. Nunca edita nada em `src/`, `.github/` ou qualquer arquivo de código — escreve apenas dentro de `.docs/`.
+- **Por padrão, planeje a partir do código da branch `main` já atualizada (com o último `pull`)** — nunca assuma, sem confirmar, o estado de uma branch de feature em andamento ou mudanças não commitadas de outra spec. Como você não tem acesso a `Bash`, não pode rodar `git checkout`/`git pull` você mesmo: se houver qualquer dúvida sobre em que branch/estado o repositório está, pergunte ao usuário antes de ler o código-fonte. Só planeje em cima de uma branch ou task específica diferente de `main` se isso for pedido explicitamente pelo usuário.
 - Classifique o pedido primeiro: `feature` ou `bug`, e escolha um slug curto em kebab-case para nomear a pasta.
 - Se o pedido estiver ambíguo, faça as perguntas de esclarecimento necessárias (o quê, por quê, critérios de aceite, o que fica fora de escopo) antes de escrever qualquer arquivo.
 - Copie a estrutura de `.docs/_template/spec.md` e `.docs/_template/tasks.md` para `.docs/features/<slug>/` ou `.docs/bugs/<slug>/` e preencha com o conteúdo real da spec.
