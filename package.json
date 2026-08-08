@@ -1,7 +1,7 @@
 {
   "name": "template-typescript",
   "version": "1.0.0",
-  "description": "",
+  "description": "Boilerplate de API REST com Express e TypeScript, seguindo o padrão Controller → Service → Route, com suporte a Docker e deploy na Vercel.",
   "main": "index.js",
   "scripts": {
     "start": "node out/index.js",
@@ -14,7 +14,7 @@
   },
   "keywords": [],
   "author": "@felipe-sant",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/cors": "^2.8.19",
