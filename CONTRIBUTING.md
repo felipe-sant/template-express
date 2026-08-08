@@ -4,19 +4,19 @@ Este documento define o padrão de branches, commits e Pull Requests deste repos
 
 ## Tipos de alteração
 
-| Tipo         |      Ícone       | Código do ícone  | Descrição                                                                     |
-| ------------ | :--------------: | ---------------- | ------------------------------------------------------------------------------ |
-| Fix          |      :bug:       | bug              | Correção de bugs.                                                             |
-| Feat         |    :sparkles:    | sparkles         | Desenvolvimento de novas funcionalidades (features).                          |
-| Hotfix       |   :ambulance:    | ambulance        | Correção de bugs a partir da branch de produção (main).                       |
-| Refactor     |    :recycle:     | recycle          | Melhorias no código (ex.: reestruturações; melhorias no código).              |
-| Test         |   :test_tube:    | test_tube        | Criação ou alteração de arquivos de teste.                                    |
-| Perf         |      :zap:       | zap              | Mudanças a fim de melhorar a performance.                                     |
-| Style        |      :art:       | art              | Mudanças apenas em estilo de código (ex.: formatação; clean code).            |
-| Docs         |      :bulb:      | bulb             | Mudanças relacionadas à documentação.                                        |
-| Build        |     :rocket:     | rocket           | Mudanças em arquivos de build (ex.: Docker; `package.json`).                  |
-| Chore        |  :see_no_evil:   | see_no_evil      | Mudanças sem impacto direto na aplicação (ex.: alterações no `.gitignore`).   |
-| Revert       |     :rewind:     | rewind           | Reverter algum commit.                                                        |
+| Tipo     |     Ícone     | Código do ícone | Descrição                                                                   |
+| -------- | :-----------: | --------------- | --------------------------------------------------------------------------- |
+| Fix      |     :bug:     | bug             | Correção de bugs.                                                           |
+| Feat     |  :sparkles:   | sparkles        | Desenvolvimento de novas funcionalidades (features).                        |
+| Hotfix   |  :ambulance:  | ambulance       | Correção de bugs a partir da branch de produção (main).                     |
+| Refactor |   :recycle:   | recycle         | Melhorias no código (ex.: reestruturações; melhorias no código).            |
+| Test     |  :test_tube:  | test_tube       | Criação ou alteração de arquivos de teste.                                  |
+| Perf     |     :zap:     | zap             | Mudanças a fim de melhorar a performance.                                   |
+| Style    |     :art:     | art             | Mudanças apenas em estilo de código (ex.: formatação; clean code).          |
+| Docs     |    :bulb:     | bulb            | Mudanças relacionadas à documentação.                                       |
+| Build    |   :rocket:    | rocket          | Mudanças em arquivos de build (ex.: Docker; `package.json`).                |
+| Chore    | :see_no_evil: | see_no_evil     | Mudanças sem impacto direto na aplicação (ex.: alterações no `.gitignore`). |
+| Revert   |   :rewind:    | rewind          | Reverter algum commit.                                                      |
 
 ## Padrão de branches
 
@@ -58,6 +58,6 @@ Chore :see_no_evil: Atualiza .gitignore
 
 - Toda alteração passa por PR para a `main` — sem push direto.
 - Ao abrir o PR, preencha: **assignees** e **labels** (use as labels já existentes no repositório: `bug`, `enhancement`, `documentation`, etc.).
-  - **Assignee**: por padrão, o autor do PR se auto-atribui já na criação (ex.: `gh pr create --assignee @me`), sem depender de edição posterior.
+    - **Assignee**: por padrão, o autor do PR se auto-atribui já na criação (ex.: `gh pr create --assignee @me`), sem depender de edição posterior.
 - Referencie a issue relacionada na descrição (ex.: `Closes #17`) para que ela seja fechada automaticamente no merge.
 - O título do PR segue o mesmo padrão do commit principal (`<Tipo> <ícone> [#<número>] <descrição>`).

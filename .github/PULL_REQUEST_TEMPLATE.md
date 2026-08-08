@@ -5,13 +5,14 @@
 ## Alterações
 
 <!-- Liste as principais mudanças realizadas. -->
-- 
-- 
-- 
+
+-
+-
+-
 
 ## Decisões técnicas
 
-<!-- 
+<!--
 Opcional. Registre decisões que não são óbvias pelo código:
 - Por que essa abordagem foi escolhida?
 - Quais alternativas foram consideradas?
@@ -21,9 +22,10 @@ Opcional. Registre decisões que não são óbvias pelo código:
 ## Como testar
 
 <!-- Descreva os passos necessários para validar a alteração. -->
-1. 
-2. 
-3. 
+
+1.
+2.
+3.
 
 ## Evidências
 

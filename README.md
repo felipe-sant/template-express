@@ -23,20 +23,20 @@ O módulo `__test__` (`__test__.controller.ts`, `__test__.routes.ts`, `__test__.
 2. Renomeie os arquivos e as classes para o novo recurso.
 3. Implemente a lógica de negócio real no service.
 4. Registre o novo router em `src/app.ts`, acima do catch-all `app.use("/", ...)`:
-   ```ts
-   app.use("/api/<recurso>", <recurso>Routes)
-   ```
+    ```ts
+    app.use("/api/<recurso>", <recurso>Routes)
+    ```
 
 ## Comandos
 
-| Comando | Descrição |
-| --- | --- |
-| `npm run dev` | Sobe o servidor de desenvolvimento com nodemon + ts-node, com hot reload (`src/**/*.ts`) |
-| `npm run build` | Faz a checagem de tipos e compila `src` para `out/` |
-| `npm start` | Builda (via `prestart`) e roda o build de produção compilado |
-| `npm run lint` | Roda o ESLint no projeto |
-| `npm run create-image` | Builda a imagem Docker (`docker build -t image .`) |
-| `npm run create-container` | Roda o container Docker, mapeando a porta 3001 do host para a 3000 do container |
+| Comando                    | Descrição                                                                                |
+| -------------------------- | ---------------------------------------------------------------------------------------- |
+| `npm run dev`              | Sobe o servidor de desenvolvimento com nodemon + ts-node, com hot reload (`src/**/*.ts`) |
+| `npm run build`            | Faz a checagem de tipos e compila `src` para `out/`                                      |
+| `npm start`                | Builda (via `prestart`) e roda o build de produção compilado                             |
+| `npm run lint`             | Roda o ESLint no projeto                                                                 |
+| `npm run create-image`     | Builda a imagem Docker (`docker build -t image .`)                                       |
+| `npm run create-container` | Roda o container Docker, mapeando a porta 3001 do host para a 3000 do container          |
 
 ## Variáveis de ambiente
 
