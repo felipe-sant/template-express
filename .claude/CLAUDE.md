@@ -10,7 +10,7 @@ Este é um boilerplate/template para APIs Express + TypeScript. Os arquivos com 
 
 - `npm run dev` — roda o servidor de desenvolvimento com nodemon + ts-node, observando `src/**/*.ts` (hot reload, sem etapa de build).
 - `npm run build` — checa tipos e compila `src` para `out/` via `tsc`.
-- `npm start` — executa `prestart` (build) e depois `node out/src/index.js`. Use isso para rodar o build de produção compilado.
+- `npm start` — executa `prestart` (build) e depois `node out/index.js`. Use isso para rodar o build de produção compilado.
 - `npm run lint` — roda o ESLint no projeto.
 - `npm run format` — roda o Prettier (`prettier --write .`) para reformatar o projeto conforme o `.prettierrc`.
 - `npm run create-image` — builda a imagem Docker (`docker build -t image .`).
