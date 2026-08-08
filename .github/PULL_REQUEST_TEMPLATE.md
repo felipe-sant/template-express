@@ -1,32 +1,36 @@
 ## Descrição
 
-<!-- O que essa PR faz e por quê. -->
+<!-- Explique brevemente o contexto, o problema e o objetivo desta PR. -->
 
-## Issue relacionada
+## Alterações
 
-Closes #
+<!-- Liste as principais mudanças realizadas. -->
+- 
+- 
+- 
 
-## Tipo de alteração
+## Decisões técnicas
 
-- [ ] :bug: Fix
-- [ ] :sparkles: Feat
-- [ ] :ambulance: Hotfix
-- [ ] :recycle: Refactor
-- [ ] :test_tube: Test
-- [ ] :zap: Perf
-- [ ] :art: Style
-- [ ] :bulb: Docs
-- [ ] :rocket: Build
-- [ ] :see_no_evil: Chore
-- [ ] :rewind: Revert
-
-## Checklist
-
-- [ ] Reviewers atribuídos
-- [ ] Assignees atribuídos
-- [ ] Labels atribuídas
-- [ ] `npm run lint` e `npm run build` passam localmente
+<!-- 
+Opcional. Registre decisões que não são óbvias pelo código:
+- Por que essa abordagem foi escolhida?
+- Quais alternativas foram consideradas?
+- Existem trade-offs ou limitações conhecidas?
+-->
 
 ## Como testar
 
-<!-- Passos para validar a alteração. -->
+<!-- Descreva os passos necessários para validar a alteração. -->
+1. 
+2. 
+3. 
+
+## Evidências
+
+<!-- Opcional. Adicione screenshots, vídeos, logs ou exemplos de request/response. -->
+
+## Impactos e pontos de atenção
+
+<!-- Opcional. Informe possíveis regressões, migrations, feature flags, dependências ou áreas afetadas. -->
+
+> Closes #
