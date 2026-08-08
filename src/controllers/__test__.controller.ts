@@ -36,7 +36,11 @@ class TestController {
      */
     public async update(req: Request, res: Response): Promise<void> {
         try {
-            const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
+            const id = req.params.id
+            if (!id) {
+                res.status(400).json({ message: "id is required!" })
+                return
+            }
 
             const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
@@ -60,7 +64,11 @@ class TestController {
      */
     public async patch(req: Request, res: Response): Promise<void> {
         try {
-            const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
+            const id = req.params.id
+            if (!id) {
+                res.status(400).json({ message: "id is required!" })
+                return
+            }
 
             const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
@@ -101,7 +109,11 @@ class TestController {
      */
     public async readOne(req: Request, res: Response): Promise<void> {
         try {
-            const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
+            const id = req.params.id
+            if (!id) {
+                res.status(400).json({ message: "id is required!" })
+                return
+            }
 
             const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
@@ -120,7 +132,11 @@ class TestController {
      */
     public async delete(req: Request, res: Response): Promise<void> {
         try {
-            const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id
+            const id = req.params.id
+            if (!id) {
+                res.status(400).json({ message: "id is required!" })
+                return
+            }
 
             const query = req.query as TestResourceQuery
             // Caso usar o query usar da seguinte forma:
