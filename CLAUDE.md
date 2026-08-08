@@ -43,6 +43,16 @@ Para adicionar um novo recurso, copie o trio controller/route/service `__test__`
 
 Toda branch, commit e PR deste repositório segue o padrão definido em `CONTRIBUTING.md`: branches como `<tipo>/<número-da-issue>-<descrição-curta>` (ex.: `fix/17-request-logger-appendfile`) e commits como `<Tipo> <ícone> [#<número-da-issue>] <descrição>` (ex.: `Fix :bug: [#17] ...`), usando um dos tipos da tabela de `CONTRIBUTING.md` (Fix, Feat, Hotfix, Refactor, Test, Perf, Style, Docs, Build, Chore, Revert) — não use labels do GitHub (ex.: `enhancement`) como `<tipo>` da branch/commit. A descrição do PR segue a estrutura de `.github/PULL_REQUEST_TEMPLATE.md` (Descrição, Issue relacionada, Tipo de alteração, Checklist, Como testar), não um corpo livre.
 
+## Convenção de tipagem
+
+O `tsconfig.json` já habilita `strict: true` (o que inclui `noImplicitAny`), então o compilador já bloqueia `any` implícito em todo o projeto. Além disso:
+
+- Não introduza `any` explícito no código — se um tipo for difícil de expressar, prefira `unknown` com uma checagem, ou modele o tipo corretamente.
+- Tipos de retorno de funções assíncronas e handlers devem ser explícitos, não inferidos (ex.: `async function createLogger(log: RequestLogEntry): Promise<void>`, `function requestLoggerMiddleware(...): void`).
+- Prefira um type/interface nomeado (em `src/types/*.types.ts`) a um literal inline repetido em mais de um lugar (parâmetro de função e objeto montado no call site, por exemplo) — evita duplicação e facilita reuso por outros módulos.
+
+Exemplo já aplicado no repositório: `RequestLogEntry` (`src/types/requestLog.types.ts`) é usado tanto no parâmetro de `createLogger` quanto na variável `log` montada em `requestLoggerMiddleware` (`src/middleware/requestLogger.middleware.ts`), no lugar do literal inline que existia antes.
+
 ## Tooling de IA (skills, agents e spec-driven)
 
 - `.claude/skills/` — pacotes de conhecimento carregáveis a pedido (`express-resource-scaffold`, `express-request-logging`), complementando este arquivo com o passo a passo detalhado de cada convenção.
