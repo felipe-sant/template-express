@@ -1,11 +1,7 @@
-import {
-    TestResourceBody,
-    TestResourceQuery,
-    TestResourceResponse,
-} from "../types/testResource.types"
+import { PreviewBody, PreviewQuery, PreviewResponse } from "../types/preview.types"
 
-class TestService {
-    create(body: TestResourceBody, query?: TestResourceQuery): TestResourceResponse {
+class PreviewService {
+    create(body: PreviewBody, query?: PreviewQuery): PreviewResponse {
         return {
             message: "Resource created successfully!",
             query: query,
@@ -13,21 +9,21 @@ class TestService {
         }
     }
 
-    read(query?: TestResourceQuery): TestResourceResponse {
+    read(query?: PreviewQuery): PreviewResponse {
         return {
             message: "Retrieved resources successfully!",
             query: query,
         }
     }
 
-    readOne(id: string, query?: TestResourceQuery): TestResourceResponse {
+    readOne(id: string, query?: PreviewQuery): PreviewResponse {
         return {
             message: `Retrieved resource with ID ${id} successfully!`,
             query: query,
         }
     }
 
-    update(id: string, body: TestResourceBody, query?: TestResourceQuery): TestResourceResponse {
+    update(id: string, body: PreviewBody, query?: PreviewQuery): PreviewResponse {
         return {
             message: `Updated resource with ID ${id} successfully!`,
             query: query,
@@ -35,7 +31,7 @@ class TestService {
         }
     }
 
-    patch(id: string, body: TestResourceBody, query?: TestResourceQuery): TestResourceResponse {
+    patch(id: string, body: PreviewBody, query?: PreviewQuery): PreviewResponse {
         return {
             message: `Patched resource with ID ${id} successfully!`,
             query: query,
@@ -43,16 +39,16 @@ class TestService {
         }
     }
 
-    delete(id: string, query?: TestResourceQuery): TestResourceResponse {
+    delete(id: string, query?: PreviewQuery): PreviewResponse {
         return {
             message: `Deleted resource with ID ${id} successfully!`,
             query: query,
         }
     }
 
-    public __test__(): boolean {
+    public healthCheck(): boolean {
         return true
     }
 }
 
-export default TestService
+export default PreviewService

@@ -1,29 +1,29 @@
 import { Request, Response, NextFunction } from "express"
-import TestService from "../services/__test__.service"
-import { TestResourceBody, TestResourceQuery } from "../types/testResource.types"
+import PreviewService from "../services/preview.service"
+import { PreviewBody, PreviewQuery } from "../types/preview.types"
 import { SuccessResponseBody } from "../types/successResponse.types"
 import BadRequestError from "../errors/BadRequestError"
 import AppError from "../errors/AppError"
 
-class TestController {
-    private testService: TestService
+class PreviewController {
+    private previewService: PreviewService
 
     constructor() {
-        this.testService = new TestService()
+        this.previewService = new PreviewService()
     }
 
     /**
-     * `POST | http://0.0.0.0:0000/api/test`
+     * `POST | http://0.0.0.0:0000/api/preview`
      */
     public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const query = req.query as TestResourceQuery
-            const body = req.body as TestResourceBody
+            const query = req.query as PreviewQuery
+            const body = req.body as PreviewBody
             if (!body || Object.keys(body).length === 0) {
                 next(new BadRequestError("body is required!"))
                 return
             }
-            const result = await this.testService.create(body, query)
+            const result = await this.previewService.create(body, query)
             const response: SuccessResponseBody<typeof result> = { data: result }
             res.status(201).json(response)
         } catch (error: unknown) {
@@ -32,7 +32,7 @@ class TestController {
     }
 
     /**
-     * `PUT | http://0.0.0.0:0000/api/test/:id`
+     * `PUT | http://0.0.0.0:0000/api/preview/:id`
      */
     public async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
@@ -42,13 +42,13 @@ class TestController {
                 return
             }
 
-            const query = req.query as TestResourceQuery
-            const body = req.body as TestResourceBody
+            const query = req.query as PreviewQuery
+            const body = req.body as PreviewBody
             if (!body || Object.keys(body).length === 0) {
                 next(new BadRequestError("body is required!"))
                 return
             }
-            const result = await this.testService.update(id, body, query)
+            const result = await this.previewService.update(id, body, query)
             const response: SuccessResponseBody<typeof result> = { data: result }
             res.status(200).json(response)
         } catch (error: unknown) {
@@ -57,7 +57,7 @@ class TestController {
     }
 
     /**
-     * `PATCH | http://0.0.0.0:0000/api/test/:id`
+     * `PATCH | http://0.0.0.0:0000/api/preview/:id`
      */
     public async patch(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
@@ -67,13 +67,13 @@ class TestController {
                 return
             }
 
-            const query = req.query as TestResourceQuery
-            const body = req.body as TestResourceBody
+            const query = req.query as PreviewQuery
+            const body = req.body as PreviewBody
             if (!body || Object.keys(body).length === 0) {
                 next(new BadRequestError("body is required!"))
                 return
             }
-            const result = await this.testService.patch(id, body, query)
+            const result = await this.previewService.patch(id, body, query)
             const response: SuccessResponseBody<typeof result> = { data: result }
             res.status(200).json(response)
         } catch (error: unknown) {
@@ -82,12 +82,12 @@ class TestController {
     }
 
     /**
-     * `GET | http://0.0.0.0:0000/api/test`
+     * `GET | http://0.0.0.0:0000/api/preview`
      */
     public async read(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const query = req.query as TestResourceQuery
-            const result = await this.testService.read(query)
+            const query = req.query as PreviewQuery
+            const result = await this.previewService.read(query)
             const response: SuccessResponseBody<typeof result> = { data: result }
             res.status(200).json(response)
         } catch (error: unknown) {
@@ -96,7 +96,7 @@ class TestController {
     }
 
     /**
-     * `GET | http://0.0.0.0:0000/api/test/:id`
+     * `GET | http://0.0.0.0:0000/api/preview/:id`
      */
     public async readOne(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
@@ -106,8 +106,8 @@ class TestController {
                 return
             }
 
-            const query = req.query as TestResourceQuery
-            const result = await this.testService.readOne(id, query)
+            const query = req.query as PreviewQuery
+            const result = await this.previewService.readOne(id, query)
             const response: SuccessResponseBody<typeof result> = { data: result }
             res.status(200).json(response)
         } catch (error: unknown) {
@@ -116,7 +116,7 @@ class TestController {
     }
 
     /**
-     * `DELETE | http://0.0.0.0:0000/api/test/:id`
+     * `DELETE | http://0.0.0.0:0000/api/preview/:id`
      */
     public async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
@@ -126,8 +126,8 @@ class TestController {
                 return
             }
 
-            const query = req.query as TestResourceQuery
-            await this.testService.delete(id, query)
+            const query = req.query as PreviewQuery
+            await this.previewService.delete(id, query)
             res.sendStatus(204)
         } catch (error: unknown) {
             next(error)
@@ -135,16 +135,16 @@ class TestController {
     }
 
     /**
-     * `GET | http://0.0.0.0:0000/api/test/_`
+     * `GET | http://0.0.0.0:0000/api/preview/_`
      */
-    public async __test__(_: Request, res: Response, next: NextFunction): Promise<void> {
+    public async healthCheck(_: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const testService = this.testService.__test__()
-            if (!testService) {
-                next(new AppError("Test service is unavailable", 500, "INTERNAL_SERVER_ERROR"))
+            const previewService = this.previewService.healthCheck()
+            if (!previewService) {
+                next(new AppError("Preview service is unavailable", 500, "INTERNAL_SERVER_ERROR"))
                 return
             }
-            const response: SuccessResponseBody<typeof testService> = { data: testService }
+            const response: SuccessResponseBody<typeof previewService> = { data: previewService }
             res.status(200).json(response)
         } catch (error: unknown) {
             next(error)
@@ -152,4 +152,4 @@ class TestController {
     }
 }
 
-export default TestController
+export default PreviewController
