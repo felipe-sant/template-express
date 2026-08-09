@@ -7,6 +7,7 @@
         "start": "node out/index.js",
         "prestart": "npm run build",
         "build": "tsc -p tsconfig.json --outDir out",
+        "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
         "dev": "nodemon --watch src --ext ts --exec \"ts-node src/index.ts\"",
         "lint": "eslint . --ext .ts",
         "format": "prettier --write .",

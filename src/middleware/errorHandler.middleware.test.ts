@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { describe, it, expect, vi } from "vitest"
 import errorHandler from "./errorHandler.middleware"
-import AppError from "../errors/AppError"
+import NotFoundError from "../errors/NotFoundError"
 
 function makeRes(headersSent: boolean): Response {
     return {
@@ -26,7 +26,7 @@ describe("errorHandler", () => {
     it("responde com statusCode/code do AppError quando o erro é conhecido", () => {
         const res = makeRes(false)
         const next = vi.fn() as NextFunction
-        const err = new AppError("not found", 404, "NOT_FOUND")
+        const err = new NotFoundError("not found")
 
         errorHandler(err, {} as Request, res, next)
 

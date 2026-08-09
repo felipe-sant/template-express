@@ -9,7 +9,8 @@ Este é um boilerplate/template para APIs Express + TypeScript. Os arquivos do s
 ## Comandos
 
 - `npm run dev` — roda o servidor de desenvolvimento com nodemon + ts-node, observando `src/**/*.ts` (hot reload, sem etapa de build).
-- `npm run build` — checa tipos e compila `src` para `out/` via `tsc`.
+- `npm run build` — checa tipos e compila `src` para `out/` via `tsc` (usa `tsconfig.json`, que **exclui** `src/**/*.test.ts` do build de produção).
+- `npm run typecheck` — checa tipos de todo `src/` **incluindo** `*.test.ts` (via `tsconfig.typecheck.json`, `noEmit`, sem excluir teste), sem gerar `out/`. Existe porque `npm run build` sozinho não type-checa arquivo de teste (excluído do `tsconfig.json`), e nem `npm run lint` (ESLint aqui usa `tseslint.configs.recommended`, sem type-awareness) nem `npm test`/`npm run test:cov` (vitest transpila TS sem checar tipos) cobrem isso — um erro de tipo dentro de um `.test.ts` (ex.: instanciar uma classe `abstract`) passaria despercebido pelos três sem esse comando.
 - `npm start` — executa `prestart` (build) e depois `node out/index.js`. Use isso para rodar o build de produção compilado.
 - `npm run lint` — roda o ESLint no projeto.
 - `npm run format` — roda o Prettier (`prettier --write .`) para reformatar o projeto conforme o `.prettierrc`.

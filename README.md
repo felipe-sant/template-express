@@ -32,7 +32,8 @@ O módulo `preview` (`preview.controller.ts`, `preview.routes.ts`, `preview.serv
 | Comando                    | Descrição                                                                                         |
 | -------------------------- | ------------------------------------------------------------------------------------------------- |
 | `npm run dev`              | Sobe o servidor de desenvolvimento com nodemon + ts-node, com hot reload (`src/**/*.ts`)          |
-| `npm run build`            | Faz a checagem de tipos e compila `src` para `out/`                                               |
+| `npm run build`            | Faz a checagem de tipos e compila `src` para `out/` (não inclui `*.test.ts`)                      |
+| `npm run typecheck`        | Checa tipos de todo `src/`, incluindo `*.test.ts` (sem gerar `out/`)                              |
 | `npm start`                | Builda (via `prestart`) e roda o build de produção compilado                                      |
 | `npm run lint`             | Roda o ESLint no projeto                                                                          |
 | `npm test`                 | Roda a suíte de testes (`vitest run`)                                                             |
@@ -47,7 +48,7 @@ Test runner: `vitest`, com `supertest` para integração HTTP contra o app Expre
 
 ## CI
 
-Três workflows em `.github/workflows/` (`lint.yml`, `build.yml`, `test.yml`), disparados em `pull_request`/`push` para `main`, rodando respectivamente `npm run lint`, `npm run build` e `npm run test:cov`.
+Três workflows em `.github/workflows/` (`lint.yml`, `build.yml`, `test.yml`), disparados em `pull_request`/`push` para `main`, rodando respectivamente `npm run lint`, `npm run build` + `npm run typecheck` e `npm run test:cov`.
 
 ## Variáveis de ambiente
 

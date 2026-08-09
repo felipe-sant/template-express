@@ -26,3 +26,6 @@ jobs:
 
             - name: Build
               run: npm run build
+
+            - name: Typecheck (inclui *.test.ts, que o build de produção exclui)
+              run: npm run typecheck
