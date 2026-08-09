@@ -7,7 +7,7 @@ import NotFoundError from "./errors/NotFoundError"
 import previewRoutes from "./routes/preview.routes"
 import dotenv from "dotenv"
 
-dotenv.config()
+dotenv.config({ quiet: true })
 
 const app = express()
 
