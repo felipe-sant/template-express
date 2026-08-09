@@ -3,6 +3,7 @@ import TestService from "../services/__test__.service"
 import { TestResourceBody, TestResourceQuery } from "../types/testResource.types"
 import { SuccessResponseBody } from "../types/successResponse.types"
 import BadRequestError from "../errors/BadRequestError"
+import AppError from "../errors/AppError"
 
 class TestController {
     private testService: TestService
@@ -139,13 +140,12 @@ class TestController {
     public async __test__(_: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const testService = this.testService.__test__()
-            if (testService) {
-                res.sendStatus(200)
-                return
-            } else {
-                res.sendStatus(500)
+            if (!testService) {
+                next(new AppError("Test service is unavailable", 500, "INTERNAL_SERVER_ERROR"))
                 return
             }
+            const response: SuccessResponseBody<typeof testService> = { data: testService }
+            res.status(200).json(response)
         } catch (error: unknown) {
             next(error)
         }
