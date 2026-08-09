@@ -8,7 +8,7 @@ Fluxo sistemático para identificar código não testado em `src/`, priorizar o 
 npm run test:cov
 ```
 
-Gera relatório via provider `v8` (configurado em `vitest.config.ts`, `coverage.include: ["src/**/*.ts"]` excluindo `**/*.test.ts` e `out/`). Para HTML:
+Gera relatório via provider `v8` (configurado em `vitest.config.mts`, `coverage.include: ["src/**/*.ts"]` excluindo `**/*.test.ts` e `out/`). Para HTML:
 
 ```bash
 npx vitest run --coverage --reporter=html --no-watch
@@ -62,7 +62,7 @@ describe("<método>", () => {
 ## Exclusões padrão deste projeto
 
 ```ts
-// vitest.config.ts → test.coverage
+// vitest.config.mts → test.coverage
 {
     provider: "v8",
     include: ["src/**/*.ts"],
@@ -110,4 +110,4 @@ preview.service.ts    |     100 |      100 |     100 |     100 |
 | Middlewares              | 80%+           | Atravessam toda requisição                            |
 | Routes (via integração)  | 70%+           | Já cobertas indiretamente pelo teste de rota completo |
 
-O gate de CI é 80% agregado (não por arquivo) — estas metas por camada são um guia para onde investir esforço primeiro, não thresholds adicionais configurados no `vitest.config.ts`.
+O gate de CI é 80% agregado (não por arquivo) — estas metas por camada são um guia para onde investir esforço primeiro, não thresholds adicionais configurados no `vitest.config.mts`.

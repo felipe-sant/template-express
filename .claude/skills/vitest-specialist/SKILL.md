@@ -19,7 +19,7 @@ description: Como escrever testes com Vitest + Supertest neste template Express,
 ## Convenções deste projeto (não são default do Vitest)
 
 - **Co-localizado, sufixo `.test.ts`, sem diretório dedicado.** Todo arquivo de `src/` que tiver teste tem seu `<nome>.test.ts` na mesma pasta (ex.: `src/routes/preview.routes.ts` → `src/routes/preview.routes.test.ts`). Nada de `__tests__/`/`.spec/` — isso já foi decidido para este repositório.
-- **Escopo de teste é só `src/`.** `vitest.config.ts` descobre testes por `src/**/*.test.ts`; `out/` (build) e arquivos de configuração não são cobertos.
+- **Escopo de teste é só `src/`.** `vitest.config.mts` descobre testes por `src/**/*.test.ts`; `out/` (build) e arquivos de configuração não são cobertos.
 - **Gate de cobertura: 80%** (lines/branches/functions/statements, provider `v8`) via `test:cov` (`vitest run --coverage`). `npm test` roda a suíte sem o gate; `npm run test:cov` é o que roda no CI.
 - **Cobertura exaustiva de cenários por rota.** Testar uma rota não é "sucesso + um erro genérico": é um caso de teste por cenário de validação/erro que o `Controller` realmente trata (veja o método antes de escrever o teste), mais o caminho completo. Não invente cenário que o controller não trata, nem deixe de cobrir um que ele trata.
 - **Erros passam por `next(...)`, nunca por `res.status(...).json(...)` direto no controller** (ver `CLAUDE.md`, "Tratamento de erros centralizado"). Isso muda como você testa erro: contra `supertest`, o corpo esperado é o envelope `{ error: { code, message } }` montado pelo `errorHandler` central — não assuma o formato de erro dentro do próprio teste do controller sem passar pelo middleware, a menos que esteja testando o controller isoladamente (mock de `next`).
@@ -36,7 +36,7 @@ A qualidade do teste é limitada pelo contexto que você reuniu. Antes do primei
 
 1. Leia o **arquivo-fonte inteiro** (controller/service/routes) — assinaturas, erros lançados/encaminhados via `next`, validações, casos de retorno antecipado.
 2. Leia 1-2 `*.test.ts` já existentes no mesmo diretório/camada para seguir as convenções reais já em uso (nomes de mocks, helpers de fixture) em vez de inventar um estilo novo.
-3. Confira `vitest.config.ts` (aliases, `coverage.include/exclude`, `globals`) e se há algum helper de setup compartilhado.
+3. Confira `vitest.config.mts` (aliases, `coverage.include/exclude`, `globals`) e se há algum helper de setup compartilhado.
 4. **Enumere os cenários pelo nome antes de escrever qualquer um deles** — caminho completo, cada validação, cada branch de erro. Se você não conseguir nomear todos os cenários de validação que o controller trata, você ainda não leu o controller com atenção suficiente.
 5. Se a convenção real do módulo contradisser este skill, **siga o módulo** e deixe isso explícito no PR/resumo — a convenção local sempre vence.
 
@@ -225,7 +225,7 @@ Se a mensagem de erro menciona hoisting, **acredite nela** — use `vi.hoisted()
 // Em beforeEach (recomendado):
 beforeEach(() => vi.clearAllMocks())
 
-// Ou globalmente em vitest.config.ts:
+// Ou globalmente em vitest.config.mts:
 test: {
     restoreMocks: true
 }

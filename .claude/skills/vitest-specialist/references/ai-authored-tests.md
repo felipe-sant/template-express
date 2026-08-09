@@ -6,7 +6,7 @@ Adaptado do guia oficial do Vitest ["Writing Tests with AI"](https://vitest.dev/
 
 1. O arquivo-fonte **inteiro** — assinaturas, erros encaminhados via `next`, retornos antecipados, defaults.
 2. 1-2 `*.test.ts` já existentes na mesma camada, para casar com as convenções reais (nomes de helpers de mock, estilo de fixture) em vez de inventar um estilo novo.
-3. `vitest.config.ts` (aliases, `coverage.include/exclude`, `globals`).
+3. `vitest.config.mts` (aliases, `coverage.include/exclude`, `globals`).
 4. Assinaturas de tipo das dependências mockadas (`Request`/`Response`/`NextFunction` do Express, o service real) — um mock com o shape errado passa no teste e mente sobre o comportamento real.
 
 Regra: se a convenção real do módulo contradisser este skill, **siga o módulo** — e diga isso explicitamente no resumo da tarefa.
