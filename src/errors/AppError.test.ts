@@ -9,9 +9,7 @@ class TestError extends AppError {
 
 describe("AppError", () => {
     it("é declarada abstract — instanciar diretamente é um erro de compilação, não de runtime", () => {
-        // @ts-expect-error AppError é abstract; só pode ser instanciada via subclasse.
-        // Se a linha abaixo parar de ser um erro de tipo (ex.: alguém remover `abstract`
-        // da classe), o `npm run build` falha por causa de um `@ts-expect-error` não usado.
+        // @ts-expect-error AppError é abstract; só pode ser instanciada via subclasse
         const error = new AppError("message", 500, "CODE")
 
         expect(error).toBeInstanceOf(AppError)
