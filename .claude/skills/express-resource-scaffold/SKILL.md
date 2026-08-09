@@ -13,10 +13,23 @@ Este template segue sempre a mesma receita de 3 camadas por recurso (Controller 
 2. Renomeie as classes (`TestController` → `UserController`, etc.) e ajuste os imports entre os três arquivos.
 3. Implemente a lógica de negócio real no `service` — é a única camada que deve conter regra de negócio.
 4. No `controller`, mantenha o padrão de cada método (`create`/`read`/`readOne`/`update`/`patch`/`delete`, incluindo `PATCH` quando fizer sentido para o recurso — os seis verbos abaixo cobrem o CRUD completo):
+    - cada handler recebe `next: NextFunction` como terceiro parâmetro (assinatura `(req, res, next)`), necessário para delegar erros ao error-handler central;
     - extrair `req.params`/`req.query`/`req.body`, usando tipos nomeados de `src/types/*.types.ts` em vez de `unknown`/literais inline;
-    - validação mínima (ex.: checar se o body existe: `if (!body || Object.keys(body).length === 0)`; com `noUncheckedIndexedAccess` ativo, `req.params.id` é `string | undefined` — valide antes de usar: `if (!id) { res.status(400)...; return }`);
+    - validação mínima (ex.: checar se o body existe: `if (!body || Object.keys(body).length === 0)`; com `noUncheckedIndexedAccess` ativo, `req.params.id` é `string | undefined` — valide antes de usar) fazendo `next(new BadRequestError("..."))` seguido de `return`, usando a hierarquia de erros de `src/errors/` (`AppError`/`NotFoundError`/`BadRequestError`) em vez de montar `res.status(400).json({ message })` manualmente:
+        ```ts
+        if (!id) {
+            next(new BadRequestError("id is required!"))
+            return
+        }
+        ```
     - delegar ao service **sempre com `await`**, mesmo que o método do service pareça síncrono hoje — omitir o `await` é um bug silencioso no primeiro service que fizer I/O real;
-    - envolver tudo em `try/catch`, logando o erro (`console.error`) e retornando `res.sendStatus(500)` em caso de falha.
+    - toda resposta de sucesso com corpo usa o envelope `res.status(<2xx>).json({ data: result })` em vez de `res.status(<2xx>).json(result)`; exceção: `204 No Content` (ex.: `delete`) usa `res.sendStatus(204)` sem corpo;
+    - envolver tudo em `try/catch` e, no `catch`, chamar `next(error)` — em vez de logar com `console.error` e retornar `res.sendStatus(500)` — delegando o tratamento ao middleware central `src/middleware/errorHandler.middleware.ts` (registrado como último `app.use(...)` em `src/app.ts`):
+        ```ts
+        } catch (error: unknown) {
+            next(error)
+        }
+        ```
 5. No `routes`, registre os verbos HTTP no construtor da classe `Router`, usando `.bind()` nos métodos do controller (eles são usados como callbacks standalone), inclusive `PATCH` (`this.router.patch(this.url_id, ...)`) quando o service implementar `patch`. Exporte o router de uma instância singleton, não a classe.
 6. Registre o novo router em `src/app.ts`, **acima** do catch-all `app.use("/", ...)`:
     ```ts

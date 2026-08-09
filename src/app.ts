@@ -1,7 +1,9 @@
-import express, { Request, Response } from "express"
+import express, { Request, Response, NextFunction } from "express"
 import cors from "cors"
 import helmet from "helmet"
 import requestLoggerMiddleware from "./middleware/requestLogger.middleware"
+import errorHandler from "./middleware/errorHandler.middleware"
+import NotFoundError from "./errors/NotFoundError"
 import testRoutes from "./routes/__test__.routes"
 import dotenv from "dotenv"
 
@@ -17,6 +19,10 @@ app.use(express.json())
 app.use(requestLoggerMiddleware)
 
 app.use("/api/test", testRoutes)
-app.use("/", (_: Request, res: Response) => res.sendStatus(404))
+app.use("/", (_req: Request, _res: Response, next: NextFunction) =>
+    next(new NotFoundError("Route not found")),
+)
+
+app.use(errorHandler)
 
 export default app

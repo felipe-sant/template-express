@@ -1,6 +1,9 @@
-import { Request, Response } from "express"
+import { Request, Response, NextFunction } from "express"
 import TestService from "../services/__test__.service"
 import { TestResourceBody, TestResourceQuery } from "../types/testResource.types"
+import { SuccessResponseBody } from "../types/successResponse.types"
+import BadRequestError from "../errors/BadRequestError"
+import AppError from "../errors/AppError"
 
 class TestController {
     private testService: TestService
@@ -12,142 +15,139 @@ class TestController {
     /**
      * `POST | http://0.0.0.0:0000/api/test`
      */
-    public async create(req: Request, res: Response): Promise<void> {
+    public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const query = req.query as TestResourceQuery
             const body = req.body as TestResourceBody
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: "body is required!" })
+                next(new BadRequestError("body is required!"))
                 return
             }
             const result = await this.testService.create(body, query)
-            res.status(201).json(result)
+            const response: SuccessResponseBody<typeof result> = { data: result }
+            res.status(201).json(response)
         } catch (error: unknown) {
-            console.error("Error:", error)
-            res.sendStatus(500)
+            next(error)
         }
     }
 
     /**
      * `PUT | http://0.0.0.0:0000/api/test/:id`
      */
-    public async update(req: Request, res: Response): Promise<void> {
+    public async update(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const id = req.params.id
             if (!id) {
-                res.status(400).json({ message: "id is required!" })
+                next(new BadRequestError("id is required!"))
                 return
             }
 
             const query = req.query as TestResourceQuery
             const body = req.body as TestResourceBody
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: "body is required!" })
+                next(new BadRequestError("body is required!"))
                 return
             }
             const result = await this.testService.update(id, body, query)
-            res.status(200).json(result)
+            const response: SuccessResponseBody<typeof result> = { data: result }
+            res.status(200).json(response)
         } catch (error: unknown) {
-            console.error("Error:", error)
-            res.sendStatus(500)
+            next(error)
         }
     }
 
     /**
      * `PATCH | http://0.0.0.0:0000/api/test/:id`
      */
-    public async patch(req: Request, res: Response): Promise<void> {
+    public async patch(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const id = req.params.id
             if (!id) {
-                res.status(400).json({ message: "id is required!" })
+                next(new BadRequestError("id is required!"))
                 return
             }
 
             const query = req.query as TestResourceQuery
             const body = req.body as TestResourceBody
             if (!body || Object.keys(body).length === 0) {
-                res.status(400).json({ message: "body is required!" })
+                next(new BadRequestError("body is required!"))
                 return
             }
             const result = await this.testService.patch(id, body, query)
-            res.status(200).json(result)
+            const response: SuccessResponseBody<typeof result> = { data: result }
+            res.status(200).json(response)
         } catch (error: unknown) {
-            console.error("Error:", error)
-            res.sendStatus(500)
+            next(error)
         }
     }
 
     /**
      * `GET | http://0.0.0.0:0000/api/test`
      */
-    public async read(req: Request, res: Response): Promise<void> {
+    public async read(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const query = req.query as TestResourceQuery
             const result = await this.testService.read(query)
-            res.status(200).json(result)
+            const response: SuccessResponseBody<typeof result> = { data: result }
+            res.status(200).json(response)
         } catch (error: unknown) {
-            console.error("Error:", error)
-            res.sendStatus(500)
+            next(error)
         }
     }
 
     /**
      * `GET | http://0.0.0.0:0000/api/test/:id`
      */
-    public async readOne(req: Request, res: Response): Promise<void> {
+    public async readOne(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const id = req.params.id
             if (!id) {
-                res.status(400).json({ message: "id is required!" })
+                next(new BadRequestError("id is required!"))
                 return
             }
 
             const query = req.query as TestResourceQuery
             const result = await this.testService.readOne(id, query)
-            res.status(200).json(result)
+            const response: SuccessResponseBody<typeof result> = { data: result }
+            res.status(200).json(response)
         } catch (error: unknown) {
-            console.error("Error:", error)
-            res.sendStatus(500)
+            next(error)
         }
     }
 
     /**
      * `DELETE | http://0.0.0.0:0000/api/test/:id`
      */
-    public async delete(req: Request, res: Response): Promise<void> {
+    public async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const id = req.params.id
             if (!id) {
-                res.status(400).json({ message: "id is required!" })
+                next(new BadRequestError("id is required!"))
                 return
             }
 
             const query = req.query as TestResourceQuery
-            const result = await this.testService.delete(id, query)
-            res.status(204).json(result)
+            await this.testService.delete(id, query)
+            res.sendStatus(204)
         } catch (error: unknown) {
-            console.error("Error:", error)
-            res.sendStatus(500)
+            next(error)
         }
     }
 
     /**
      * `GET | http://0.0.0.0:0000/api/test/_`
      */
-    public async __test__(_: Request, res: Response): Promise<void> {
+    public async __test__(_: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const testService = this.testService.__test__()
-            if (testService) {
-                res.sendStatus(200)
-                return
-            } else {
-                res.sendStatus(500)
+            if (!testService) {
+                next(new AppError("Test service is unavailable", 500, "INTERNAL_SERVER_ERROR"))
                 return
             }
+            const response: SuccessResponseBody<typeof testService> = { data: testService }
+            res.status(200).json(response)
         } catch (error: unknown) {
-            console.error("Error:", error)
-            res.sendStatus(500)
+            next(error)
         }
     }
 }
