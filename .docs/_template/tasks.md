@@ -18,14 +18,14 @@ Fase 1 (sequencial)  →  Fase 2 (T2 [P] e T3 [P] em paralelo)  →  Fase 3
 ## Tarefas
 
 - [ ] T1 — <descrição objetiva da tarefa>
-  - **Arquivo(s):** `src/...`
-  - **Depende de:** nenhuma
-  - **Feito quando:** critério objetivo e verificável (ex.: comportamento X passa a ocorrer, comando Y não gera erro)
+    - **Arquivo(s):** `src/...`
+    - **Depende de:** nenhuma
+    - **Feito quando:** critério objetivo e verificável (ex.: comportamento X passa a ocorrer, comando Y não gera erro)
 
 - [ ] T2 [P] — <descrição objetiva da tarefa>
-  - **Arquivo(s):** `src/...`
-  - **Depende de:** T1 <!-- remova esta linha se não houver dependência -->
-  - **Feito quando:** critério objetivo e verificável
+    - **Arquivo(s):** `src/...`
+    - **Depende de:** T1 <!-- remova esta linha se não houver dependência -->
+    - **Feito quando:** critério objetivo e verificável
 
 <!-- `[P]` no título marca a tarefa como paralelizável com outras `[P]` da mesma fase (ver "Plano de execução"). Omita o marcador se a tarefa for sequencial. -->
 

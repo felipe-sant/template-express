@@ -1,4 +1,4 @@
-import { appendFile as appendFileFs } from "fs/promises";
+import { appendFile as appendFileFs } from "fs/promises"
 
 async function appendFile(path: string, content: string): Promise<void> {
     try {

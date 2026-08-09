@@ -1,5 +1,5 @@
-import { Router } from 'express'
-import TestController from "../controllers/__test__.controller";
+import { Router } from "express"
+import TestController from "../controllers/__test__.controller"
 
 class TestRoutes {
     private testController: TestController
@@ -13,43 +13,28 @@ class TestRoutes {
         this.testController = new TestController()
 
         // `POST | http://0.0.0.0:0000/api/test`
-        this.router.post(
-            this.url,
-            this.testController.create.bind(this.testController)
-        )
+        this.router.post(this.url, this.testController.create.bind(this.testController))
 
         // `PUT | http://0.0.0.0:0000/api/test/:id`
-        this.router.put(
-            this.url_id,
-            this.testController.update.bind(this.testController)
-        )
+        this.router.put(this.url_id, this.testController.update.bind(this.testController))
+
+        // `PATCH | http://0.0.0.0:0000/api/test/:id`
+        this.router.patch(this.url_id, this.testController.patch.bind(this.testController))
 
         // `GET | http://0.0.0.0:0000/api/test`
-        this.router.get(
-            this.url,
-            this.testController.read.bind(this.testController)
-        )
+        this.router.get(this.url, this.testController.read.bind(this.testController))
 
         // `GET | http://0.0.0.0:0000/api/test/:id`
-        this.router.get(
-            this.url_id,
-            this.testController.readOne.bind(this.testController)
-        )
+        this.router.get(this.url_id, this.testController.readOne.bind(this.testController))
 
         // `DELETE | http://0.0.0.0:0000/api/test/:id`
-        this.router.delete(
-            this.url_id,
-            this.testController.delete.bind(this.testController)
-        )
+        this.router.delete(this.url_id, this.testController.delete.bind(this.testController))
 
         // `GET | http://0.0.0.0:0000/api/test/_`
-        this.router.get(
-            this.url_test,
-            this.testController.__test__.bind(this.testController)
-        )
+        this.router.get(this.url_test, this.testController.__test__.bind(this.testController))
     }
 
-    public getRouter() {
+    public getRouter(): Router {
         return this.router
     }
 }

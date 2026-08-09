@@ -1,42 +1,45 @@
 {
-  "name": "template-typescript",
-  "version": "1.0.0",
-  "description": "Boilerplate de API REST com Express e TypeScript, seguindo o padrão Controller → Service → Route, com suporte a Docker e deploy na Vercel.",
-  "main": "index.js",
-  "scripts": {
-    "start": "node out/index.js",
-    "prestart": "npm run build",
-    "build": "tsc -p tsconfig.json --outDir out",
-    "dev": "nodemon --watch src --ext ts --exec \"ts-node src/index.ts\"",
-    "lint": "eslint . --ext .ts",
-    "create-image": "docker build -t image .",
-    "create-container": "docker run -d --name container -p 3001:3000 image"
-  },
-  "keywords": [],
-  "author": "@felipe-sant",
-  "license": "MIT",
-  "engines": {
-    "node": ">=20"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/node": "^22.5.4",
-    "@typescript-eslint/eslint-plugin": "^8.48.1",
-    "@typescript-eslint/parser": "^8.48.1",
-    "eslint": "^9.39.1",
-    "globals": "^16.5.0",
-    "jiti": "^2.6.1",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.48.1"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "helmet": "^8.3.0"
-  }
+    "name": "template-typescript",
+    "version": "1.0.0",
+    "description": "Boilerplate de API REST com Express e TypeScript, seguindo o padrão Controller → Service → Route, com suporte a Docker e deploy na Vercel.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node out/index.js",
+        "prestart": "npm run build",
+        "build": "tsc -p tsconfig.json --outDir out",
+        "dev": "nodemon --watch src --ext ts --exec \"ts-node src/index.ts\"",
+        "lint": "eslint . --ext .ts",
+        "format": "prettier --write .",
+        "create-image": "docker build -t image .",
+        "create-container": "docker run -d --name container -p 3001:3000 image"
+    },
+    "keywords": [],
+    "author": "@felipe-sant",
+    "license": "MIT",
+    "engines": {
+        "node": ">=20"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.39.1",
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.6",
+        "@types/node": "^22.5.4",
+        "@typescript-eslint/eslint-plugin": "^8.48.1",
+        "@typescript-eslint/parser": "^8.48.1",
+        "eslint": "^9.39.1",
+        "eslint-config-prettier": "^10.1.8",
+        "globals": "^16.5.0",
+        "jiti": "^2.6.1",
+        "nodemon": "^3.0.1",
+        "prettier": "^3.9.6",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^8.48.1"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^17.2.3",
+        "express": "^5.2.1",
+        "helmet": "^8.3.0"
+    }
 }

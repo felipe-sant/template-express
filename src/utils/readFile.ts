@@ -1,8 +1,8 @@
-import { readFileSync } from "fs";
+import { readFileSync } from "fs"
 
 function readFile(caminho: string): string {
     try {
-        return readFileSync(caminho, "utf-8");
+        return readFileSync(caminho, "utf-8")
     } catch {
         return ""
     }
