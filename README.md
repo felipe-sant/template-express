@@ -29,17 +29,17 @@ O módulo `preview` (`preview.controller.ts`, `preview.routes.ts`, `preview.serv
 
 ## Comandos
 
-| Comando                    | Descrição                                                                                |
-| -------------------------- | ---------------------------------------------------------------------------------------- |
-| `npm run dev`              | Sobe o servidor de desenvolvimento com nodemon + ts-node, com hot reload (`src/**/*.ts`) |
-| `npm run build`            | Faz a checagem de tipos e compila `src` para `out/`                                      |
-| `npm start`                | Builda (via `prestart`) e roda o build de produção compilado                             |
-| `npm run lint`             | Roda o ESLint no projeto                                                                 |
-| `npm test`                 | Roda a suíte de testes (`vitest run`)                                                    |
-| `npm run test:watch`       | Roda a suíte em modo watch (`vitest`)                                                    |
+| Comando                    | Descrição                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| `npm run dev`              | Sobe o servidor de desenvolvimento com nodemon + ts-node, com hot reload (`src/**/*.ts`)          |
+| `npm run build`            | Faz a checagem de tipos e compila `src` para `out/`                                               |
+| `npm start`                | Builda (via `prestart`) e roda o build de produção compilado                                      |
+| `npm run lint`             | Roda o ESLint no projeto                                                                          |
+| `npm test`                 | Roda a suíte de testes (`vitest run`)                                                             |
+| `npm run test:watch`       | Roda a suíte em modo watch (`vitest`)                                                             |
 | `npm run test:cov`         | Roda a suíte com cobertura (`vitest run --coverage`); falha se alguma métrica ficar abaixo de 80% |
-| `npm run create-image`     | Builda a imagem Docker (`docker build -t image .`)                                       |
-| `npm run create-container` | Roda o container Docker, mapeando a porta 3001 do host para a 3000 do container          |
+| `npm run create-image`     | Builda a imagem Docker (`docker build -t image .`)                                                |
+| `npm run create-container` | Roda o container Docker, mapeando a porta 3001 do host para a 3000 do container                   |
 
 ## Testes
 

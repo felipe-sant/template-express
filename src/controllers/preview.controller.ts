@@ -3,7 +3,7 @@ import PreviewService from "../services/preview.service"
 import { PreviewBody, PreviewQuery } from "../types/preview.types"
 import { SuccessResponseBody } from "../types/successResponse.types"
 import BadRequestError from "../errors/BadRequestError"
-import AppError from "../errors/AppError"
+import InternalServerError from "../errors/InternalServerError"
 
 class PreviewController {
     private previewService: PreviewService
@@ -141,7 +141,7 @@ class PreviewController {
         try {
             const previewService = this.previewService.healthCheck()
             if (!previewService) {
-                next(new AppError("Preview service is unavailable", 500, "INTERNAL_SERVER_ERROR"))
+                next(new InternalServerError("Preview service is unavailable"))
                 return
             }
             const response: SuccessResponseBody<typeof previewService> = { data: previewService }
