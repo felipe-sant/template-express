@@ -26,6 +26,7 @@ Ao descrever tarefas/critérios de aceite que envolvam código, considere estas 
 - Toda chamada a um método `async` de um service dentro de um controller deve usar `await`.
 - Tipos nomeados em `src/types/*.types.ts` para body/query/response, em vez de `unknown` genérico ou literais inline repetidos.
 - Paridade entre as três camadas do scaffold: todo verbo implementado no service deve ter método no controller e rota registrada (e vice-versa).
+- O projeto já tem `vitest` + `supertest` configurados, com teste co-localizado (`<arquivo>.test.ts` ao lado do arquivo testado, ex.: `src/routes/preview.routes.test.ts` — nunca `__tests__/`/`.spec.ts`) e gate de cobertura mínima de 80% via `npm run test:cov`. Ao planejar uma tarefa de mudança de comportamento de código (não config/documentação pura), indique no `tasks.md` qual `.test.ts` co-localizado cobre aquela tarefa, quando fizer sentido para o tipo de mudança — o campo "Feito quando" da tarefa deve referenciar esse arquivo de teste, não só descrever o comportamento em prosa. Uma spec que cria ou altera rota deve prever a tarefa de escrever/atualizar o `.test.ts` correspondente como parte do escopo planejado (não como item à parte/opcional). Essa exigência não se aplica a tarefas puramente de documentação/config, que continuam sem exigir teste.
 
 ## Consome
 
